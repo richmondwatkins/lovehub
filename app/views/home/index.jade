@@ -2,5 +2,21 @@ extends ../shared/template
 
 block content
   body
-  
-  h1 loveHUB
+
+  .main-container
+    .main-content
+      img.main-image(src='/img/whiteBG.jpg')
+      img.logo(src='/img/loveHUBgreen.png')
+
+      .registration-container
+        .registration
+          form#form-registration(action='/register', method='post')
+            h1 Registration
+            input(type='text', name='name', placeholder='Name')
+            input(type='email', name='email', placeholder='Email Address')
+            input(type='password', name='password', placeholder='Password')
+            button.button#register Register
+
+
+
+block scripts
