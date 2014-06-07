@@ -9,11 +9,18 @@ var Mongo = require('mongodb');
 var mkdirp = require('mkdirp');
 var fs = require('fs');
 var bcrypt = require('bcrypt');
+var multiparty = require('multiparty');
 
-
-class User {
+class User{
 
   static create(obj, fn){
+    console.log(obj);
+    var form = new multiparty.Form();
+    form.parse(obj.body.photos, (err, fields, files)=>{
+      console.log('FILES FILES');
+      console.log(files);
+      console.log('FIELDS FIELDS');
+      console.log(fields);
     users.findOne({username: obj.username, email: obj.email}, (e, u)=>{
       if(!u){
         var user = new User();
@@ -31,13 +38,12 @@ class User {
         user.zipcode = obj.zipcode;
         user.githubUsername = obj.githubUsername;
         user.developerType = obj.developerType;
-        user.photos = obj.photos;
-
-        users.save(user, ()=>fn(user));
+        user.uploadAlbum(obj.photos, ()=>users.save(user, ()=>fn(user)));
 
       }else{
         fn(null);
       }
+      });
     });
   } //end of create
 

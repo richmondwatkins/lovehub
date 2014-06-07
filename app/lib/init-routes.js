@@ -20,10 +20,9 @@ function load(app, fn){
   app.get('/', dbg, home.index);
   app.get('/about', dbg, home.about);
 
-  app.get('/users', dbg, users.index);
   app.get('/users/new', dbg, users.new);
   app.post('/users', dbg, users.create);
-
+  app.get('/users/:userId', dbg, users.show);
 
 
   console.log('Routes Loaded');

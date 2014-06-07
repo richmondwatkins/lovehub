@@ -3,7 +3,7 @@ extends ../shared/template
 block content
   .profile-wrapper
     .profile-bar(style='background-image: url("img/profile-bar/Sunset_Marina.jpg");')
-      h1 Will Daly
+      h1= user.username
     .pic-info
       .profile-pic(style='background-image: url("img/profile-primary/will.jpg");')
 
@@ -12,22 +12,23 @@ block content
         ul
           li
             h3 seeking
-            p non-developer female
+            p= user.seekingDeveloper
+            p= user.seekingGender
           li
-            h3 location
-            p nashville
+            h3 Zipcode
+            p= user.zipcode
           li
             h3 profession
-            p front-end developer
+            p= user.developerType
           li
             h3 age
-            p 28
+            p= user.age
     .interact
       ul
         li
-          a.btn.btn-primary.btn-lg.active(href='http://www.github.com/willdaly') github profile
+          a.btn.btn-primary.btn-lg.active(href='http://www.github.com/#{user.githubUsername}') github profile
         li
-          a.btn.btn-primary.btn-lg.active.glyphicon.glyphicon-envelope(href='/mail') send mail
+          a.btn.btn-primary.btn-lg.active.glyphicon.glyphicon-envelope(href='mailto:#{user.email}?Subject=Hey%20there!')= user.email
         li
           a.btn.btn-primary.btn-lg.active(href='/chat') chat with will
         li
@@ -38,10 +39,13 @@ block content
         li(data-target='#carousel-example-generic', data-slide-to='1')
         li(data-target='#carousel-example-generic', data-slide-to='2')
       .carousel-inner
-        .item.active
-          img(src='img/profile-secondary/will.JPG')
-        .item
-          img(src='img/profile-secondary/will2.JPG')
+        each photo in user.photos
+          if photo.isPrimary
+            .item.active
+              img(src='photo.path')
+          if i > 0
+            .item
+              img(src='img/profile-secondary/will2.JPG')
 
       a.left.carousel-control(href='#carousel-example-generic', data-slide='prev')
         span.glyphicon.glyphicon-chevron-left

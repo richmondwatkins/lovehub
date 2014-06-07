@@ -1,6 +1,7 @@
+/* jshint unused: false */
 'use strict';
-// var traceur = require('traceur');
-// var User = traceur.require(__dirname + '/../models/user.js');
+var traceur = require('traceur');
+var User = traceur.require(__dirname + '/../models/user.js');
 
 exports.index = (req, res)=>{
   res.render('users/index', {title: 'user'});
@@ -11,5 +12,13 @@ exports.new = (req, res)=>{
 };
 
 exports.create = (req, res)=>{
-  res.render('users/index', {title: 'user'});
+  User.create(req, user=>{
+    res.redirect(`/users/${user._id}`);
+  });
+};
+
+exports.show = (req, res)=>{
+  User.findUserById(req.params.userId, user=>{
+    res.render('users/show' , {user:user});
+  });
 };
