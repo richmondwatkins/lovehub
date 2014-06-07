@@ -14,31 +14,27 @@ var multiparty = require('multiparty');
 class User{
 
   static create(obj, fn){
-    console.log(obj);
     var form = new multiparty.Form();
     form.parse(obj, (err, fields, files)=>{
-    users.findOne({username: obj.username, email: obj.email}, (e, u)=>{
-      if(!u){
-        var user = new User();
-        user._id = Mongo.ObjectID(obj._id);
-        user.username = obj.username;
-        user.age = parseInt(obj.age);
-        user.email = obj.email;
-        user.aboutMe = obj.aboutMe;
-        user.password = bcrypt.hashSync(obj.password, 8);
-        user.gender = obj.gender;
-        user.isDeveloper = obj.isDeveloper;
-        user.seekingDeveloper = obj.seekingDeveloper;
-        user.seekingGender = obj.seekingGender;
-
-        user.zipcode = obj.zipcode;
-        user.githubUsername = obj.githubUsername;
-        user.developerType = obj.developerType;
-        user.uploadAlbum(obj.photos, ()=>users.save(user, ()=>fn(user)));
-
-      }else{
-        fn(null);
-      }
+      users.findOne({username: fields.username[0], email: fields.email[0]}, (e, u)=>{
+        if(!u){
+          var user = new User();
+          user.username = fields.username[0];
+          user.age = parseInt(fields.age[0]);
+          user.email = fields.email[0];
+          user.aboutMe = fields.aboutMe[0];
+          user.password = bcrypt.hashSync(fields.password[0], 8);
+          user.gender = fields.gender[0];
+          user.isDeveloper = fields.isDeveloper[0];
+          user.seekingDeveloper = fields.seekingDeveloper[0];
+          user.seekingGender = fields.seekingGender[0];
+          user.zipcode = fields.zipcode[0];
+          user.githubUsername = fields.githubUsername[0];
+          user.developerType = fields.developerType[0];
+          users.save(user, ()=>user.uploadAlbum(files, ()=>fn(user)));
+        }else{
+          fn(null);
+        }
       });
     });
   } //end of create
@@ -93,21 +89,22 @@ class User{
       users.save(user, ()=>fn());
   }//end of editProfile
 
-    uploadAlbum(files, fn){
-      var user = this;
+  uploadAlbum(files, fn){
+    var user = this;
     mkdirp(`${__dirname}/../static/img/${user._id}/albumPhotos`, function(err) {
      if(err){
        console.error(err);
      }else{
-        var photoArray = [];
-        files.photo.forEach((p, i)=>{
-           fs.renameSync(files.photo[i].path,`${__dirname}/../static/img/${user._id}/albumPhotos/${p.originalFilename}`);
-           var photo = {};
+       var photoArray = [];
+       files.photos.forEach((p, i)=>{
+        fs.renameSync(files.photos[i].path,`${__dirname}/../static/img/${user._id}/albumPhotos/${p.originalFilename}`);
+         var photo = {};
           //  photo.isPrimary = false;
-           photo.path = `/img/${user._id}/albumPhotos/${p.originalFilename}`;
-           photo.name = `${p.originalFilename}`;
-           photoArray.push(photo);
-         });
+         photo.path = `/img/${user._id}/albumPhotos/${p.originalFilename}`;
+         photo.name = `${p.originalFilename}`;
+         photo.isPrimary = i === 0;
+         photoArray.push(photo);
+       });
        user.photos = photoArray;
        users.save(user, ()=>fn());
      }

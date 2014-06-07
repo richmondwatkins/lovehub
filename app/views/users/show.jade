@@ -2,10 +2,12 @@ extends ../shared/template
 
 block content
   .profile-wrapper
-    .profile-bar(style='background-image: url("img/profile-bar/Sunset_Marina.jpg");')
+    each photo in user.photos
+      .profile-bar(style='background-image: url("#{photo.isPrimary}");')
       h1= user.username
     .pic-info
-      .profile-pic(style='background-image: url("img/profile-primary/will.jpg");')
+      each photo in user.photos
+        .profile-pic(style='background-image: url("#{photo.isPrimary}");')
 
 
       .info
