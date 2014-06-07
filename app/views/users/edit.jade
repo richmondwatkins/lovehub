@@ -1,23 +1,24 @@
 extends ../shared/template
 
 block content
-  .panel.panel-default#newProfile
+  .panel.panel-default#editProfile
     .panel-heading
-      h1 Create your LoveHub Profile
+      h1 Edit Profile
     .panel-body
-      form(action='/users', method='POST', enctype='multipart/form-data')
+      form(action='/users/#{user._id}', method='post', enctype='multipart/form-data')
+        input(type='hidden', name='_method', value='put')
         .input-group
           span.input-group-addon name
-          input.form-control(type='text', name='username', required, placeholder='Name')
+          input.form-control(type='text', name='username', value='#{user.username}')
         .input-group
-          span.input-group-addon.glyphicon.glyphicon-envelope
-          input.form-control(type='email', name='email', required, placeholder='Email')
+          span.input-group-addon.glyphicon.glyphicon-envelope email
+          input.form-control(type='email', name='email', value='#{user.email}')
         .input-group
           span.input-group-addon password
-          input.form-control(type='password', name='password', required, placeholder='Password')
+          input.form-control(type='password', name='password', value='#{user.password}')
         .input-group
           span.input-group-addon zipcode
-          input.form-control(type='text', name='zipcode', required, placeholder='Zip Code')
+          input.form-control(type='text', name='zipcode', value='#{user.zipcode}')
         .input-group
           span.input-group-addon gender
           select.form-control(name='gender')
@@ -25,17 +26,17 @@ block content
             option female
         .input-group
           span.input-group-addon age
-          input.form-control(type='text', name='age', required, placeholder='Age')
+          input.form-control(type='text', name='age', value='#{user.age}')
         .input-group
           span.input-group-addon github username
-          input.form-control(type='text', name='githubUsername', required, placeholder='GitHub Username')
+          input.form-control(type='text', name='githubUsername', required, value='#{user.githubUsername}')
         .input-group
-          span.input-group-addon developer?
+          span.input-group-addon are you a developer?
           select.form-control(name='isDeveloper')
             option True
             option False
         .input-group
-          span.input-group-addon development side?
+          span.input-group-addon what type of developer?
           select.form-control(name='developerType')
             option Front End
             option Back End
@@ -50,9 +51,9 @@ block content
             option Male
             option Female
         .input-group
-          span.input-group-addon.glyphicon.glyphicon-pencil
-          textarea.form-control(name='aboutMe', placeholder='about me')
+          span.input-group-addon about me
+          textarea.form-control(name='aboutMe')= user.aboutMe
         .input-group
-          span.input-group-addon.glyphicon.glyphicon-picture
+          span.input-group-addon add photos
           input.form-control(type='file', name='photos', required, multiple=true)
-        button.btn.btn-primary.glyphicon.glyphicon-save#profile-save Save Profile
+        button.btn.btn-primary#profile-save Save Profile

@@ -23,6 +23,7 @@ function load(app, fn){
   app.get('/users/new', dbg, users.new);
   app.post('/users', dbg, users.create);
   app.get('/users/:userId', dbg, users.show);
+  app.get('/users/:userId/edit', dbg, users.edit);
 
 
   console.log('Routes Loaded');

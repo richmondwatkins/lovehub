@@ -23,3 +23,9 @@ exports.show = (req, res)=>{
     res.render('users/show' , {user:user});
   });
 };
+
+exports.edit = (req, res)=>{
+  User.findUserById(req.params.id, user=>{
+    user.editProfile(req.body, ()=>res.redirect(`/users/${user._id}`));
+  });
+};
