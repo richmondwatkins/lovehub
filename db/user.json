@@ -42,5 +42,13 @@
     "zipcode": "37024",
     "developerType": "front-end",
       "photos":[{"filename":"photo1.jpg"}, {"filename":"photo2.png"}]}
+=======
+    "primaryPhoto": "dickpic.jpg",
+    "coverPhoto": [{"filename": "coverphoto.jpg", "path": "/img/539210e386bba63fe0b2ddf6/coverPhotos/picture69.jpg"}],
+    "photos":[{"filename":"photo1.jpg", "isPrimary": true}, {"filename":"photo2.png", "isPrimary": false, "path": "/img/539210e386bba63fe0b2ddf6/albumPhotos/picture69.jpg"}]
+  },
+  {"username": "elaine69", "email": "elaine96@aol.com", "password": "lookin4dick", "gender": "female", "isDeveloper":"false", "seekingDeveloper":"true", "seekingGender": "male", "githubUsername": "horncat97", "zipcode": "37033", "developerType": "back-end", "primaryPhoto": "vagpic.jpg", "photos":[{"filename":"photo1.jpg"}, {"filename":"photo2.png"}]},
+  {"username": "billy69", "email": "billy69@aol.com", "password": "lookin4boobs", "gender": "male", "isDeveloper":"true", "seekingDeveloper":"false", "seekingGender": "female", "githubUsername": "hornsquirell97", "zipcode": "37024", "developerType": "front-end", "primaryPhoto": "testepic.jpg", "photos":[{"filename":"photo1.jpg"}, {"filename":"photo2.png"}]}
+>>>>>>> aa648485981d2177c5a41af2489e1a960f2db0f6
 
 ]
