@@ -16,11 +16,7 @@ class User{
   static create(obj, fn){
     console.log(obj);
     var form = new multiparty.Form();
-    form.parse(obj.body.photos, (err, fields, files)=>{
-      console.log('FILES FILES');
-      console.log(files);
-      console.log('FIELDS FIELDS');
-      console.log(fields);
+    form.parse(obj, (err, fields, files)=>{
     users.findOne({username: obj.username, email: obj.email}, (e, u)=>{
       if(!u){
         var user = new User();
