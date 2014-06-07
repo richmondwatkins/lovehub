@@ -1,0 +1,51 @@
+extends ../shared/template
+
+block content
+  .profile-wrapper
+    .profile-bar(style='background-image: url("img/profile-bar/Sunset_Marina.jpg");')
+      h1 Will Daly
+    .pic-info
+      .profile-pic(style='background-image: url("img/profile-primary/will.jpg");')
+
+
+      .info
+        ul
+          li
+            h3 seeking
+            p non-developer female
+          li
+            h3 location
+            p nashville
+          li
+            h3 profession
+            p front-end developer
+          li
+            h3 age
+            p 28
+    .interact
+      ul
+        li
+          a.btn.btn-primary.btn-lg.active(href='http://www.github.com/willdaly') github profile
+        li
+          a.btn.btn-primary.btn-lg.active.glyphicon.glyphicon-envelope(href='/mail') send mail
+        li
+          a.btn.btn-primary.btn-lg.active(href='/chat') chat with will
+        li
+          a.btn.btn-primary.btn-lg(href='/edit') edit profile
+    #carousel-example-generic.carousel.slide(data-ride='carousel')
+      ol.carousel-indicators
+        li.active(data-target='#carousel-example-generic', data-slide-to='0')
+        li(data-target='#carousel-example-generic', data-slide-to='1')
+        li(data-target='#carousel-example-generic', data-slide-to='2')
+      .carousel-inner
+        .item.active
+          img(src='img/profile-secondary/will.JPG')
+        .item
+          img(src='img/profile-secondary/will2.JPG')
+
+      a.left.carousel-control(href='#carousel-example-generic', data-slide='prev')
+        span.glyphicon.glyphicon-chevron-left
+      a.right.carousel-control(href='#carousel-example-generic', data-slide='next')
+        span.glyphicon.glyphicon-chevron-right
+    .about-me
+      p i enjoy long walks on the beach, romantic music, fine wine, jacuzzis, matching sweaters in fall weather.

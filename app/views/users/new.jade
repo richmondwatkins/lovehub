@@ -1,0 +1,61 @@
+extends ../shared/template
+
+block content
+  .panel.panel-default#newProfile
+    .panel-heading
+      h1 New Profile
+    .panel-body
+      form(action='/profile', method='post', enctype='multipart/form-data')
+        .input-group
+          span.input-group-addon name
+          input.form-control(type='text', name='username', required, placeholder='Name')
+        .input-group
+          span.input-group-addon.glyphicon.glyphicon-envelope email
+          input.form-control(type='email', name='email', required, placeholder='Email')
+        .input-group
+          span.input-group-addon password
+          input.form-control(type='password', name='password', required, placeholder='Password')
+        .input-group
+          span.input-group-addon zipcode
+          input.form-control(type='text', name='zipcode', required, placeholder='City or Zip Code')
+        .input-group
+          span.input-group-addon gender
+          select.form-control(name='gender')
+            option male
+            option female
+        .input-group
+          span.input-group-addon age
+          input.form-control(type='text', name='age', required, placeholder='Age')
+        .input-group
+          span.input-group-addon github username
+          input.form-control(type='text', name='githubUsername', required, placeholder='GitHub Username')
+        .input-group
+          span.input-group-addon developer?
+          select.form-control(name='isDeveloper')
+            option True
+            option False
+        .input-group
+          span.input-group-addon development side?
+          select.form-control(name='developerType')
+            option Front End
+            option Back End
+        .input-group
+          span.input-group-addon seeking developer?
+          select.form-control(name='seekingDeveloper')
+            option True
+            option False
+        .input-group
+          span.input-group-addon interested in?
+          select.form-control(name='seekingGender')
+            option Male
+            option Female
+        .input-group
+          span.input-group-addon description
+          textarea.form-control(name='aboutMe', placeholder='Description')
+        .input-group
+          span.input-group-addon primary photo
+          input.form-control(type='file', name='primaryPhoto', required)
+        .input-group
+          span.input-group-addon more photos
+          input.form-control(type='file', name='photos', required, multiple=true)
+        button.btn.btn-primary#profile-save Save Profile
