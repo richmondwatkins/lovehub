@@ -27,7 +27,6 @@ var User;
   beforeEach(function(done){
     global.nss.db.collection('users').drop(function(){
     cp.execFile(__dirname + '/../../fixtures/before.sh', {cwd:__dirname + '/../../fixtures'}, function(err, stdout, stderr){
-      console.log(stdout);
       factory('user', function(users){
         done();
         });
@@ -77,7 +76,6 @@ var User;
   describe('.findUserById', function(){
     it('should find a user by their Id', function(done){
       User.findUserById('539210e386bba63fe0b2ddf6', function(u){
-        console.log(u);
         done();
       });
     });
@@ -104,35 +102,33 @@ var User;
     it('should upload new album photo(s)', function(done){
       var files = {photo: [{originalFilename: 'picture69.jpg', path:__dirname + '/../../fixtures/copy/picture69.jpg'}, {originalFilename: 'picture70.jpg', path:__dirname + '/../../fixtures/copy/picture70.jpg'}]};
       User.findUserById('539210e386bba63fe0b2ddf6', function(u){
-        User.uploadAlbum(files, u, function(albums){
+        User.uploadAlbum(files, u, function(){
           done();
         });
       });
     });
   });
 
+  describe('#setPrimary', function(){
+    it('should update a photos status to primary', function(done){
+      User.findUserById('539210e386bba63fe0b2ddf6', function(u){
+        u.setPrimary('/img/539210e386bba63fe0b2ddf6/albumPhotos/picture69.jpg', function(){
+          done();
+        });
+      });
+    });
+  });
 
-
-
-  // describe('.create', function(){
-  //   it('should create a floor - absolute photo path', function(done){
-  //     var fields = {name:['tile'], rate:['4.35']};
-  //     var files = {photo:[{originalFilename:'tile1-DELETE.png', path:__dirname + '/../../fixtures/copy/tile1-DELETE.png', size:10}]};
-  //     fields.photo = files.photo;
-  //
-  //     Floor.create(fields, function(floor){
-  //       expect(floor).to.be.instanceof(Floor);
-  //       expect(floor._id).to.be.instanceof(Mongo.ObjectID);
-  //       expect(floor.rate).to.be.within(4.34, 4.36);
-  //       expect(floor.name).to.equal('tile');
-  //       expect(floor.photo).to.equal('/img/flooring/tile1-DELETE.png');
-  //
-  //       var imgExists = fs.existsSync(__dirname + '/../../../app/static/img/flooring/tile1-DELETE.png');
-  //       expect(imgExists).to.be.true;
-  //       done();
-  //     });
-  //   });
-
-
+  //Not working!!!!!
+  describe('.coverPhoto', function(){
+    it('should update the cover photo', function(done){
+      var files = {coverPhoto: [{originalFilename: 'coverphoto.jpg', path:__dirname + '/../../fixtures/copy/coverphoto.jpg'}]};
+      User.findUserById('539210e386bba63fe0b2ddf6', function(u){
+        u.coverPhoto(files, function(){
+          done();
+        });
+      });
+    });
+  });
 
 }); //end of main  describe

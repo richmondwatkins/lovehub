@@ -10,10 +10,7 @@ class Base{
     }
 
     if(!(id instanceof Mongo.ObjectID)){fn(null); return;}
-    console.log('id id id ');
-    console.log(id);
-
-    collection.findOne({_id:id}, (e,o)=>{
+      collection.findOne({_id:id}, (e,o)=>{
       if(o){
         o = _.create(model.prototype, o);
         fn(o);

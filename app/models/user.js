@@ -93,7 +93,7 @@ class User {
         files.photo.forEach((p, i)=>{
            fs.renameSync(files.photo[i].path,`${__dirname}/../static/img/${user._id}/albumPhotos/${p.originalFilename}`);
            var photo = {};
-           photo.isPrimary = false;
+          //  photo.isPrimary = false;
            photo.path = `/img/${user._id}/albumPhotos/${p.originalFilename}`;
            photo.name = `${p.originalFilename}`;
            photoArray.push(photo);
@@ -103,6 +103,41 @@ class User {
      }
    });
   }
+
+  //NOT WORKING !!! Kristian couldn't fix it
+  coverPhoto(files, fn){
+    // if(files.length!==1){fn(null); return;}
+    var id = this._id;
+
+    var coverphoto = {};
+    mkdirp(`${__dirname}/../static/img/${id}/coverPhoto`, function(err){
+      if(err){
+        console.error(err);
+        console.log('bojangle');
+      }else{
+        console.log('X-x-x-x-x-x-xx-x-');
+        console.log(files.coverPhoto);
+
+        files.coverPhoto.forEach(p=>{fs.renameSync(files.coverPhoto[0].path, `${__dirname}/../static/img/${id}/coverPhoto/${p.originalFilename}`);
+        coverPhoto.path = `/img/${id}/coverPhoto/${p.originalFilename}`;
+        coverPhoto.name = `${p.originalFilename}`;
+        });
+      }
+      console.log(this);
+      this.coverPhoto = coverphoto;
+      users.save(this, ()=>fn());
+    });
+  }
+
+
+  setPrimary(path, fn){
+    users.update({_id:this._id, 'photos.isPrimary':true}, {$set:{'photos.$.isPrimary':false}}, ()=>{
+      users.update({_id:this._id, 'photos.path':path}, {$set:{'photos.$.isPrimary':true}}, ()=>{
+        fn();
+      });
+    });
+  }
+
 
 
 
