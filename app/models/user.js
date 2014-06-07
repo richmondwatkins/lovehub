@@ -13,7 +13,7 @@ var fs = require('fs');
 class User {
 
   static create(obj, fn){
-    users.findOne({email: obj.email}, (e, u)=>{
+    users.findOne({username: obj.username, email: obj.email}, (e, u)=>{
       if(!u){
         var user = new User();
         user._id = Mongo.ObjectID(obj._id);
@@ -85,14 +85,20 @@ class User {
   }//end of editProfile
 
   static uploadAlbum(files, user, fn){
-    mkdirp(`${__dirname}/../static/img/albumPhotos/${user._id}`, function(err) {
+    mkdirp(`${__dirname}/../static/img/${user._id}/albumPhotos`, function(err) {
      if(err){
        console.error(err);
      }else{
+        var photoArray = [];
         files.photo.forEach((p, i)=>{
-           fs.renameSync(files.photo[i].path,`${__dirname}/../static/img/albumPhotos/${user._id}/${p.originalFilename}`);
-           user.photo = `/img/flooring/${p.originalFilename}`;
+           fs.renameSync(files.photo[i].path,`${__dirname}/../static/img/${user._id}/albumPhotos/${p.originalFilename}`);
+           var photo = {};
+           photo.isPrimary = false;
+           photo.path = `/img/${user._id}/albumPhotos/${p.originalFilename}`;
+           photo.name = `${p.originalFilename}`;
+           photoArray.push(photo);
          });
+       user.photos = photoArray;
        users.save(user, ()=>fn(user));
      }
    });
