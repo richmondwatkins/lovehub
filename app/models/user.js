@@ -31,8 +31,7 @@ class User{
           user.zipcode = fields.zipcode[0];
           user.githubUsername = fields.githubUsername[0];
           user.developerType = fields.developerType[0];
-          user.uploadAlbum(files, ()=>users.save(user, ()=>fn(user)));
-
+          users.save(user, ()=>user.uploadAlbum(files, ()=>fn(user)));
         }else{
           fn(null);
         }
@@ -100,9 +99,9 @@ class User{
        files.photos.forEach((p, i)=>{
         fs.renameSync(files.photos[i].path,`${__dirname}/../static/img/${user._id}/albumPhotos/${p.originalFilename}`);
          var photo = {};
-          //  photo.isPrimary = false;
          photo.path = `/img/${user._id}/albumPhotos/${p.originalFilename}`;
          photo.name = `${p.originalFilename}`;
+         photo.isPrimary = i === 0;
          photoArray.push(photo);
        });
        user.photos = photoArray;
@@ -111,6 +110,14 @@ class User{
    });
   }
 
+  get primaryPhoto(){
+    this.photos.forEach(p=>{
+      if(p.isPrimary){
+        return p.path;
+      }
+    });
+    return null;
+  }
 
   coverPhoto(files, fn){
     // if(files.length!==1){fn(null); return;}

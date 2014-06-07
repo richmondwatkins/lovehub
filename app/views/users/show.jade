@@ -5,7 +5,7 @@ block content
     .profile-bar(style='background-image: url("img/profile-bar/Sunset_Marina.jpg");')
       h1= user.username
     .pic-info
-      .profile-pic(style='background-image: url("img/profile-primary/will.jpg");')
+      .profile-pic(style='background-image: url("#{user.primaryPhoto}");')
 
 
       .info
@@ -35,21 +35,23 @@ block content
           a.btn.btn-primary.btn-lg(href='/edit') edit profile
     #carousel-example-generic.carousel.slide(data-ride='carousel')
       ol.carousel-indicators
-        li.active(data-target='#carousel-example-generic', data-slide-to='0')
-        li(data-target='#carousel-example-generic', data-slide-to='1')
-        li(data-target='#carousel-example-generic', data-slide-to='2')
-      .carousel-inner
-        each photo in user.photos
-          if photo.isPrimary
-            .item.active
-              img(src='photo.path')
+        each photo, i in user.photos
+          if i === 0
+            li.active(data-target='#carousel-example-generic', data-slide-to='0')
           if i > 0
+            li(data-target='#carousel-example-generic', data-slide-to='#{i}')
+      .carousel-inner
+        each photo, i in user.photos
+          if i === 0
+            .item.active
+              img(src='#{photo.path}')
+          if !photo.isPrimary && i > 0
             .item
-              img(src='img/profile-secondary/will2.JPG')
+              img(src='#{photo.path}')
 
       a.left.carousel-control(href='#carousel-example-generic', data-slide='prev')
         span.glyphicon.glyphicon-chevron-left
       a.right.carousel-control(href='#carousel-example-generic', data-slide='next')
         span.glyphicon.glyphicon-chevron-right
     .about-me
-      p i enjoy long walks on the beach, romantic music, fine wine, jacuzzis, matching sweaters in fall weather.
+      p= user.aboutMe
