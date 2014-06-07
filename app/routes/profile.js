@@ -7,3 +7,7 @@ exports.index = (req, res)=>{
 exports.new = (req, res)=>{
   res.render('profile/new', {title: 'New Profile'});
 };
+
+exports.create = (req, res)=>{
+  res.render('profile/index', {title: 'Profile'});
+};

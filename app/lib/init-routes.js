@@ -22,6 +22,7 @@ function load(app, fn){
 
   app.get('/profile', dbg, profile.index);
   app.get('/profile/new', dbg, profile.new);
+  app.post('/profile', dbg, profile.create);
 
 
 

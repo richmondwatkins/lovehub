@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/css?family=Petit+Formal+Script);
 @main-color: #4EAE47;
 
 
@@ -63,6 +64,9 @@
 
 .button {
   color:@main-color;
+
+body{
+  background-image: url('/img/diamonds.png');
 }
 
 .page-header, .panel-heading, .panel-body {
@@ -83,6 +87,7 @@
   width: 80%;
   border: 1px solid black;
   border-radius: 15px;
+  background: white;
 }
 
 .profile-pic {
@@ -90,20 +95,68 @@
   width: 200px;
   border: 1px solid black;
   background-size: contain;
-}
-
-.secondary-pic {
-  height: 150px;
-  width: 200px;
-  border: 1px solid black;
-  background-size: contain;
+  position: relative;
+  top: -100px;
+  left: 170px;
 }
 
 .about-me {
-  margin: 0 auto;
-  width: 80%;
+  font-family: 'Petit Formal Script', cursive;
+  margin-top: 10px;
+  padding: 10px;
+  width: 625px;
   border: 1px solid black;
   border-radius: 15px;
+  position: relative;
+  top: -750px;
+  left: 400px;
+}
+
+.info {
+  border: 1px solid black;
+  width: 200px;
+  position: relative;
+  left: 170px;
+  top: -100px;
+    ul{
+    list-style-position: inside;
+  }
+}
+//
+.interact {
+  .btn{
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  ul {
+    list-style-type: none;
+  }
+  position: relative;
+  top: -500px;
+  left: 800px;
+  display: inline-block;
+  // border: 1px solid black;
+}
+
+.profile-bar {
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  // margin: 0 auto;
+  width: 80%;
+  height: 200px;
+
+  border: 1px solid black;
+  background-image: contain;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  text-align: center;
+  h1 {
+    line-height: 200px;
+    color: white;
+  }
 }
 
 .interact, .info {
@@ -126,4 +179,16 @@
   width: 50%;
   margin-left: auto;
   margin-right: auto;
+
+#carousel-example-generic {
+  position: relative;
+  top:-765px;
+  left: 425px;
+  height: 300px;
+  width: 400px;
+  .item{
+    height: 300px;
+    width: 400px;
+  }
+
 }
