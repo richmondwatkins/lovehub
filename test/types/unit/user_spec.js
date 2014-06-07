@@ -38,7 +38,7 @@ var User;
 
     describe('.create', function(){
     it('should successfully create a user', function(done){
-      User.create({_id: '539210e386bba63fe0b2ddf6', username: 'dilly69', email: 'dilly69@aol.com', password: 'lookin4tits', gender: 'male', isDeveloper:true, seekingDeveloper:false, seekingGender: 'male'}, function(u){
+      User.create({_id: '539210e386bba63fe0b2ddf6', age: '20', username: 'dilly69', email: 'dilly69@aol.com', password: 'lookin4tits', gender: 'male', isDeveloper:true, seekingDeveloper:false, seekingGender: 'male'}, function(u){
         expect(u).to.be.ok;
         expect(u).to.be.an.instanceof(User);
         expect(u._id).to.be.an.instanceof(Mongo.ObjectID);
@@ -89,20 +89,22 @@ var User;
     });
   });
 
-  describe('.editProfile', function(){
+  describe('#editProfile', function(){
     it('should edit a single users profile', function(done){
-      User.editProfile({_id: '539210e386bba63fe0b2ddf6', username: 'jerry69', email: 'jerry69@aol.com', password: 'lookin4sex', gender: 'male', isDeveloper:true, seekingDeveloper: true, seekingGender: 'female', githubUsername: 'horndog97', zipcode: '37027', developerType: 'front-end'}, function(u){
+      User.findUserById('539210e386bba63fe0b2ddf6', function(u){
+        u.editProfile({username: 'jerry69', email: 'jerry69@aol.com', password: 'lookin4sex', gender: 'male', isDeveloper:true, seekingDeveloper: true, seekingGender: 'female', githubUsername: 'horndog97', zipcode: '37027', developerType: 'front-end'}, function(){
+          done();
+        });
         // "photos":[{"filename":"photo1.jpg"}, {"filename":"photo2.png"}]
-        done();
       });
     });
   });
 
-  describe('.uploadAlbum', function(){
+  describe('#uploadAlbum', function(){
     it('should upload new album photo(s)', function(done){
       var files = {photo: [{originalFilename: 'picture69.jpg', path:__dirname + '/../../fixtures/copy/picture69.jpg'}, {originalFilename: 'picture70.jpg', path:__dirname + '/../../fixtures/copy/picture70.jpg'}]};
       User.findUserById('539210e386bba63fe0b2ddf6', function(u){
-        User.uploadAlbum(files, u, function(){
+        u.uploadAlbum(files, function(){
           done();
         });
       });
@@ -120,7 +122,7 @@ var User;
   });
 
   //Not working!!!!!
-  describe('.coverPhoto', function(){
+  describe('#coverPhoto', function(){
     it('should update the cover photo', function(done){
       var files = {coverPhoto: [{originalFilename: 'coverphoto.jpg', path:__dirname + '/../../fixtures/copy/coverphoto.jpg'}]};
       User.findUserById('539210e386bba63fe0b2ddf6', function(u){
