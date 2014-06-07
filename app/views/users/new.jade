@@ -5,7 +5,7 @@ block content
     .panel-heading
       h1 New Profile
     .panel-body
-      form(action='/profile', method='post', enctype='multipart/form-data')
+      form(action='/users', method='post', enctype='multipart/form-data')
         .input-group
           span.input-group-addon name
           input.form-control(type='text', name='username', required, placeholder='Name')
