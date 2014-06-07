@@ -10,20 +10,22 @@ block content
         .registration
           form#form-registration(action='/register', method='post')
             h1 Registration
-            input(type='text', name='name', placeholder='Name')
-            input(type='email', name='email', placeholder='Email Address')
-            input(type='password', name='password', placeholder='Password')
+            input(type='text', name='name', required, placeholder='Name')
+            input(type='email', name='email', required, placeholder='Email Address')
+            input(type='password', name='password', required, placeholder='Password')
             button.button#register Register
 
   .second-container
-    .page-header
-      h1.glyphicon.glyphicon-heart LoveHub
-      h2.text-muted front-end seeking back-end
+
     .panel.panel-default
       .panel-heading
         h2.panel-title Develop your Love Life
       .panel-body
         p Finally, a dating site for developers and the people who love them. Startup a new relationship today.
+
+    //- .page-header
+      //- h1.glyphicon.glyphicon-heart LoveHub
+      //- h2.text-muted front-end seeking back-end
 
 
 block scripts

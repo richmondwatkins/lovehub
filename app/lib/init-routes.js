@@ -18,8 +18,10 @@ function load(app, fn){
   var profile = traceur.require(__dirname + '/../routes/profile.js');
 
   app.get('/', dbg, home.index);
+  app.get('/about', dbg, home.about);
 
   app.get('/profile', dbg, profile.index);
+  app.get('/profile/new', dbg, profile.new);
 
   console.log('Routes Loaded');
   fn();
