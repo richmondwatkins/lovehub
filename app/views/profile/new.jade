@@ -4,14 +4,19 @@ block content
   h1 New Profile
     .profile-create-container
       form(action='/profile', method='post', enctype='multipart/form-data')
-        input(type='text', name='name', required, placeholder='Name', value='#{user.name}')
-        input(type='text', name='location', required, placeholder='City or Zip Code')
-        input(type='text', name='age', required, placeholder='Age')
-        input(type='text', name='git', required, placeholder='Git Profile Url')
-        select(name='Profession')
-          option Front End Developer
-        select(name='Seeking')
-          option Back End Developer
+        input(type='text', name='username', required, placeholder='Name', value='#{user.username}')
+        input(type='text', name='zipcode', required, placeholder='City or Zip Code')
+        input(type='text', name='gender', required, placeholder='Gender')
+        input(type='text', name='githubUsername', required, placeholder='GitHub Username')
+        select(name='isDeveloper')
+          option True or False
+        select(name='developerType')
+          option Front End or Back End
+        select(name='seekingDeveloper')
+          option True or False
+        select(name='seekingGender')
+          option Male or Female
         textarea(name='description', placeholder='Description')
+        input(type='file', name='primaryPhoto', required)
         input(type='file', name='photos', required, multiple=true)
         button#profile-save Save Profile
