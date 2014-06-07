@@ -8,12 +8,11 @@ block content
 
       .registration-container
         .registration
-          form#form-registration(action='/register', method='post')
-            h1 Registration
-            input(type='text', name='username', required, placeholder='Name')
-            input(type='email', name='email', required, placeholder='Email Address')
-            input(type='password', name='password', required, placeholder='Password')
-            button.button#register Register
+          .register
+            h1 Become A Member
+            a.btn.btn-primary#register(href='/users/new') Register Today!
+
+
 
   .second-container
 
