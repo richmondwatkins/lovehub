@@ -3,12 +3,15 @@ var _ = require('lodash');
 
 class Base{
   static findById(id, collection, model, fn){
+
     if(typeof id === 'string'){
       if(id.length !== 24){fn(null); return;}
       id = Mongo.ObjectID(id);
     }
 
     if(!(id instanceof Mongo.ObjectID)){fn(null); return;}
+    console.log('id id id ');
+    console.log(id);
 
     collection.findOne({_id:id}, (e,o)=>{
       if(o){

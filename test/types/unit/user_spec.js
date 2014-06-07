@@ -76,7 +76,8 @@ var User;
 
   describe('.findUserById', function(){
     it('should find a user by their Id', function(done){
-      User.findUserById({_id:'539210e386bba63fe0b2ddf6'}, function(u){
+      User.findUserById('539210e386bba63fe0b2ddf6', function(u){
+        console.log(u);
         done();
       });
     });
@@ -102,11 +103,16 @@ var User;
   describe('.uploadAlbum', function(){
     it('should upload new album photo(s)', function(done){
       var files = {photo: [{originalFilename: 'picture69.jpg', path:__dirname + '/../../fixtures/copy/picture69.jpg'}, {originalFilename: 'picture70.jpg', path:__dirname + '/../../fixtures/copy/picture70.jpg'}]};
-      User.uploadAlbum(files, function(albums){
-        console.log(albums);
+      User.findUserById('539210e386bba63fe0b2ddf6', function(u){
+        User.uploadAlbum(files, u, function(albums){
+          done();
+        });
       });
     });
   });
+
+
+
 
   // describe('.create', function(){
   //   it('should create a floor - absolute photo path', function(done){

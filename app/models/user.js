@@ -1,9 +1,14 @@
+/* jshint unused:false */
+
 'use strict';
 
 var users = global.nss.db.collection('users');
 var traceur = require('traceur');
 var Base =  traceur.require(__dirname + '/base.js');
 var Mongo = require('mongodb');
+var mkdirp = require('mkdirp');
+var fs = require('fs');
+
 
 class User {
 
@@ -79,10 +84,23 @@ class User {
     });
   }//end of editProfile
 
-  static uploadAlbum(photos, fn){
-    console.log('photos photos photos');
-    console.log(photos);
+  static uploadAlbum(files, user, fn){
+    mkdirp(`${__dirname}/../static/img/albumPhotos/${user._id}`, function(err) {
+     if(err){
+       console.error(err);
+     }else{
+        files.photo.forEach((p, i)=>{
+           fs.renameSync(files.photo[i].path,`${__dirname}/../static/img/albumPhotos/${user._id}/${p.originalFilename}`);
+           user.photo = `/img/flooring/${p.originalFilename}`;
+         });
+       users.save(user, ()=>fn(user));
+     }
+   });
   }
+
+
+
+
 
 
 } //end of Class User
