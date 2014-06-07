@@ -26,6 +26,8 @@ exports.show = (req, res)=>{
 
 exports.edit = (req, res)=>{
   User.findUserById(req.params.id, user=>{
+    console.log('******user******');
+    console.log(user);
     user.editProfile(req.body, ()=>res.redirect(`/users/${user._id}`));
   });
 };
