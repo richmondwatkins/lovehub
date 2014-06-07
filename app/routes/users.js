@@ -13,6 +13,7 @@ exports.new = (req, res)=>{
 
 exports.create = (req, res)=>{
   User.create(req, user=>{
+    console.log(user);
     res.redirect(`/users/${user._id}`);
   });
 };
