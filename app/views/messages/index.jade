@@ -1,18 +1,32 @@
 extends ../shared/template
 
 block content
-  .button-container
-  each message in messages
-    div(class='modal fade', id='#{message._id}', tabindex='-1', role='dialog')
-        .modal-dialog
-          .modal-content
-            .modal-header
-              button.close(type='button', data-dismiss='modal') &times;
-              h4.modal-title#myModalLable Modal test
-            .modal-body
-              p= message.content
-            .modal-footer
-              button.submit.btn.btn-info Submit
+  if(messages)
+    .button-container
+    each message in messages
+      div(class='modal fade', id='#{message._id}', tabindex='-1', role='dialog')
+          .modal-dialog
+            .modal-content
+              .modal-header
+                button.close(type='button', data-dismiss='modal') &times;
+                h4.modal-title#myModalLable= message.subject
+              .modal-body
+                p= message.content
+              .modal-footer
+                button.submit.btn.btn-info Submit
+
+    .button-container
+    each message in sentMessages
+      div(class='modal fade', id='#{message._id}', tabindex='-1', role='dialog')
+          .modal-dialog
+            .modal-content
+              .modal-header
+                button.close(type='button', data-dismiss='modal') &times;
+                h4.modal-title#myModalLable= message.subject
+              .modal-body
+                p= message.content
+              .modal-footer
+                button.submit.btn.btn-info Submit
 
 
   ul.nav.nav.tabs
@@ -78,13 +92,15 @@ block content
               td
               td
           tbody
-            tr
-              td horncat
-              td hey babe
-              td
-                button.btn.btn-info.glyphicon.glyphicon-eye-open(type='button', data-toggle='modal', data-target='#myModal')
-              td
-                button.btn.btn-warning.glyphicon.glyphicon-trash
+          if(sentMessages)
+            each message in sentMessages
+              tr
+                td= message.toUsername
+                td= message.subject
+                td
+                  button.btn.btn-info.glyphicon.glyphicon-eye-open(type='button', data-toggle='modal', data-target='##{message._id}')
+                td
+                  button.btn.btn-warning.glyphicon.glyphicon-trash
 
 
 block scripts

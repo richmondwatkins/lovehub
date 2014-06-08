@@ -7,7 +7,9 @@ var User = traceur.require(__dirname + '/../models/user.js');
 
 exports.index = (req, res)=>{
   Message.findInbox(res.locals.user._id, messages=>{
-    res.render('messages/index', {messages:messages, title: 'messages'});
+    Message.findSent(res.locals.user._id, sentMessages=>{
+      res.render('messages/index', {messages:messages, sentMessages:sentMessages, title: 'messages'});
+    });
   });
 };
 

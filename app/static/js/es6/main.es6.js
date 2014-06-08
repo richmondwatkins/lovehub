@@ -6,7 +6,7 @@
 
   function init(){
     $('#filter').click(filter);
-    $('#showAll').click(showAll);
+    // $('#showAll').click(showAll);
     $('#clear').click(clearMessage);
   }
 
@@ -32,11 +32,11 @@
     e.preventDefault();
   }
 
-  function showAll(){
-    ajax('/search/all', 'GET', null, res=>{
-      $('#searchResults').empty().append(res);
-    });
-  }
+  // function showAll(){
+  //   ajax('/search/all', 'GET', null, res=>{
+  //     $('#searchResults').empty().append(res);
+  //   });
+  // }
 
 
   function ajax(url, type, data={}, success=r=>console.log(r), dataType='html'){
