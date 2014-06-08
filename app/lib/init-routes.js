@@ -39,6 +39,7 @@ function load(app, fn){
 
   app.get('/messages', dbg, messages.index);
 
+
   console.log('Routes Loaded');
   fn();
 }

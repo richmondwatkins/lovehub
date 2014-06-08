@@ -1,49 +1,58 @@
 [
-  {"_id": "539210e386bba63fe0b2ddf6",
-    "username": "jerry69",
-    "age": "18",
-    "email": "jerry69@aol.com",
-    "aboutMe": "hi mom",
-    "password": "lookin4sex",
-    "gender": "male",
-    "isDeveloper":true,
-    "seekingDeveloper": true,
-    "seekingGender": "female",
-    "githubUsername": "horndog97",
-    "zipcode": "37027",
-    "developerType": "front-end",
-      "coverPhoto": [{"filename": "coverphoto.jpg", "path": "/img/539210e386bba63fe0b2ddf6/coverPhotos/picture69.jpg"}],
-        "photos":[{"filename":"photo1.jpg", "isPrimary": true}, {"filename":"photo2.png", "isPrimary": false, "path": "/img/539210e386bba63fe0b2ddf6/albumPhotos/picture69.jpg"}]},
+  {"fields":
+    { "username": ["female69"],
+      "email": ["femail69@me.com"],
+      "password": ["a"],
+      "zipcode": ["39202"],
+      "gender": ["Female"],
+      "age": ["34"],
+      "githubUsername": ["jasdfi"],
+      "isDeveloper": ["Developer"],
+      "developerType": ["Front End"],
+      "seekingDeveloper": ["Developer"],
+      "seekingGender": ["Male"],
+      "aboutMe": ["This is the about me"]
+    },
 
-  {"username": "elaine69",
-    "age": "21",
-    "email": "elaine96@aol.com",
-    "aboutMe": "about me about me",
-    "password": "lookin4dick",
-    "gender": "female",
-    "isDeveloper": false,
-    "seekingDeveloper":true,
-    "seekingGender": "male",
-    "githubUsername": "horncat97",
-    "zipcode": "37033",
-    "developerType": "back-end",
-      "photos":[{"filename":"photo1.jpg"}, {"filename":"photo2.png"}]},
+    "files":
+    { "photos":
+      [{"fieldName": "photos",
+        "originalFilename": "picture69.jpg",
+        "path": "/Users/richmondwatkins/Documents/Code/lovehub/test/fixtures/copy/picture69.jpg"
+        },
+      {"fieldName": "photos",
+        "originalFilename": "picture70.jpg",
+        "path": "/Users/richmondwatkins/Documents/Code/lovehub/test/fixtures/copy/picture70.jpg"
+        }]
+    }
+  },
 
-  {"username": "billy69",
-    "age": "24",
-    "aboutMe": "test about me test me",
-    "email": "billy69@aol.com",
-    "password": "lookin4boobs",
-    "gender": "male",
-    "isDeveloper":true,
-    "seekingDeveloper":false,
-    "seekingGender": "female",
-    "githubUsername": "hornsquirell97",
-    "zipcode": "37024",
-    "developerType": "front-end",
-    "coverPhoto": [{"filename": "coverphoto.jpg", "path": "/img/539210e386bba63fe0b2ddf6/coverPhotos/picture69.jpg"}],
-    "photos": [{"filename":"photo1.jpg", "isPrimary": true}, {"filename":"photo2.png", "isPrimary": false, "path": "/img/539210e386bba63fe0b2ddf6/albumPhotos/picture69.jpg"}]
+  {"fields":
+    { "username": ["maless69"],
+      "email": ["mailsss69@me.com"],
+      "password": ["a"],
+      "zipcode": ["392d02"],
+      "gender": ["Male"],
+      "age": ["33"],
+      "githubUsername": ["jasssdfi"],
+      "isDeveloper": ["Developer"],
+      "developerType": ["Front End"],
+      "seekingDeveloper": ["Developer"],
+      "seekingGender": ["Female"],
+      "aboutMe": ["This isasds the about me"]
+    },
+
+    "files":
+    { "photos":
+      [{"fieldName": "photos",
+        "originalFilename": "picture70.jpg",
+        "path": "/Users/richmondwatkins/Documents/Code/lovehub/test/fixtures/copy/picture71.jpg"
+        },
+      {"fieldName": "photos",
+        "originalFilename": "picture71.jpg",
+        "path": "/Users/richmondwatkins/Documents/Code/lovehub/test/fixtures/copy/picture72.jpg"
+        }]
+    }
   }
-
 
 ]
