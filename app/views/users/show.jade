@@ -11,8 +11,10 @@ block content
       .info
         ul
           li
-            h3 seeking
+            h5 Into felloow devlopers?
             p= user.seekingDeveloper
+          li
+            h3 seeking
             p= user.seekingGender
           li
             h3 Zipcode
@@ -26,13 +28,16 @@ block content
     .interact
       ul
         li
-          a.button-border-action(href='http://www.github.com/#{user.githubUsername}') github profile
+          a(href='http://www.github.com/#{user.githubUsername}') github profile
         li
-          a.button-border-action.glyphicon.glyphicon-envelope(href='mailto:#{user.email}?Subject=Hey%20there!')= user.email
+          a.glyphicon.glyphicon-envelope(href='mailto:#{user.email}?Subject=Hey%20there!')= user.email
         li
-          a.button-border-action(href='/chat') chat with #{user.username}
-        li
-          a.button-border-action(href='/edit') edit profile
+          a(href='/chat') chat with #{user.username}
+
+        if(user && user.isOwner(user))  
+          li
+            a(href='/edit') edit profile
+
     #carousel-example-generic.carousel.slide(data-ride='carousel')
       ol.carousel-indicators
         each photo, i in user.photos

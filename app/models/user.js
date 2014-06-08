@@ -10,10 +10,13 @@ var mkdirp = require('mkdirp');
 var fs = require('fs');
 var bcrypt = require('bcrypt');
 var multiparty = require('multiparty');
+var _ = require('lodash');
 
 class User{
 
   static create(obj, fn){
+      console.log('THIS IS THE OBJ');
+      console.log(obj);
     var form = new multiparty.Form();
     form.parse(obj, (err, fields, files)=>{
       users.findOne({username: fields.username[0], email: fields.email[0]}, (e, u)=>{
@@ -32,12 +35,15 @@ class User{
           user.githubUsername = fields.githubUsername[0];
           user.developerType = fields.developerType[0];
           users.save(user, ()=>user.uploadAlbum(files, ()=>fn(user)));
+          obj.session.userId = user._id;
         }else{
           fn(null);
         }
       });
     });
   } //end of create
+
+
 
   static login(obj, fn){
     users.findOne({email: obj.email}, (e, u)=>{
@@ -85,7 +91,6 @@ class User{
       user.githubUsername = obj.githubUsername;
       user.zipcode = obj.zipcode;
       user.developerType = obj.developerType;
-      user.photos = obj.photos;
       users.save(user, ()=>fn());
   }//end of editProfile
 
@@ -99,6 +104,7 @@ class User{
        files.photos.forEach((p, i)=>{
         fs.renameSync(files.photos[i].path,`${__dirname}/../static/img/${user._id}/albumPhotos/${p.originalFilename}`);
          var photo = {};
+         p.originalFilename = p.originalFilename.replace(/\s/g, '');
          photo.path = `/img/${user._id}/albumPhotos/${p.originalFilename}`;
          photo.name = `${p.originalFilename}`;
          photo.isPrimary = i === 0;
@@ -138,6 +144,12 @@ class User{
     });
   }
 
+  findParams(fn){
+    var searchParams = {};
+    searchParams.seekingDeveloper  = this.seekingDeveloper;
+    searchParams.seekingGender = this.seekingGender;
+    fn(searchParams);
+  }
 
   setPrimary(path, fn){
     users.update({_id:this._id, 'photos.isPrimary':true}, {$set:{'photos.$.isPrimary':false}}, ()=>{
@@ -148,6 +160,22 @@ class User{
   }
 
 
+  static findMatches(params, fn){
+    var gender = params.seekingGender;
+    var dev = params.seekingDeveloper;
+    console.log('GENDER');
+    console.log(gender);
+    console.log('DEV STATUS');
+    console.log(dev);
+    users.find({gender: gender, isDeveloper: dev}).toArray((e, users)=>{
+      users = users.map(u=>_.create(User.prototype, u));
+        fn(users);
+    });
+  }
+
+  isOwner(user){
+    return user._id.toString() === this.userId.toString();
+  }
 
 
 

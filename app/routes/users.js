@@ -46,3 +46,20 @@ exports.logout = (req, res)=>{
   req.session.userId = null;
   res.redirect('/');
 };
+
+exports.lookup = (req, res, next)=>{
+  User.findUserById(req.session.userId, u=>{
+    res.locals.user = u;
+    next();
+  });
+};
+
+exports.edit = (req, res)=>{
+  User.findById(req.params.id, user=>{
+    if(user.isOwner(res.locals.user)){
+      res.render('users/edit', {});  //
+    }else{
+      res.redirect('/users/show');
+    }
+  });
+};
