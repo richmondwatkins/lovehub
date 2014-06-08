@@ -17,6 +17,8 @@ function load(app, fn){
   var home = traceur.require(__dirname + '/../routes/home.js');
   var users = traceur.require(__dirname + '/../routes/users.js');
   var chat = traceur.require(__dirname + '/../routes/chat.js');
+  var search = traceur.require(__dirname + '/../routes/search.js');
+
 
   app.all('*', users.lookup);
 
@@ -27,6 +29,10 @@ function load(app, fn){
   app.post('/users', dbg, users.create);
   app.get('/users/:userId', dbg, users.show);
 
+  app.get('/search', dbg, search.index);
+
+  app.get('/login', dbg, users.login);
+  app.post('/login', dbg, users.authenticate);
   app.get('/logout', dbg, users.logout);
 
   app.get('/chat', dbg, chat.index);

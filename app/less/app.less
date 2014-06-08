@@ -2,7 +2,7 @@
 @import url(http://fonts.googleapis.com/css?family=Droid+Sans+Mono);
 @main-color: #4EAE47;
 
-
+///////////login page///////////
 .main-container{
   margin: 0;
   width:100%;
@@ -56,6 +56,47 @@
   color:@main-color;
   margin: 5px;
 }
+
+.success-images {
+  border-radius: 50%;
+  margin: 20px;
+}
+
+.third-container {
+
+  .success-images{
+    float: left;
+    box-shadow: 0em 0em 1em;
+  }
+  h3{
+    float: right;
+    font-family: 'Droid Sans Mono' ;
+    color: @main-color;
+  }
+}
+
+.fourth-container {
+
+  .success-images{
+    float: right;
+    box-shadow: 0em 0em 1em;
+  }
+  h3{
+    float: left;
+    font-family: 'Droid Sans Mono' ;
+    color: @main-color;
+    font-size: 40px;
+  }
+}
+
+.bottom-container {
+  width: 100%;
+  height:200px;
+}
+
+
+/////////profile new page///////////////
+
 
 body{
   background-image: url('/img/diamonds.png');
@@ -173,11 +214,15 @@ body{
   margin:5px;
 }
 
+//////////////////////About Page///////////////////////////////////////
+
 .about-content{
   width: 50%;
   margin-left: auto;
   margin-right: auto;
 }
+
+///////////////////Profile Page////////////////////////////
 
 #carousel-example-generic {
   position: relative;
@@ -215,39 +260,37 @@ body{
   }
 }
 
-.success-images {
-  border-radius: 50%;
+a.button-border-action{
   margin: 20px;
 }
 
-.third-container {
+///////////////login page///////////////////////////////
+.login-content{
+  width: 35%;
+  margin-left: auto;
+  margin-right: auto;
 
-  .success-images{
-    float: left;
-    box-shadow: 0em 0em 1em;
-  }
-  h3{
-    float: right;
+  h1{
+    text-align: center;
     font-family: 'Droid Sans Mono' ;
-    color: @main-color;
+
   }
+
 }
 
-.fourth-container {
+#member-login-form{
+ text-align:center;
 
-  .success-images{
-    float: right;
-    box-shadow: 0em 0em 1em;
-  }
-  h3{
-    float: left;
-    font-family: 'Droid Sans Mono' ;
-    color: @main-color;
-    font-size: 40px;
-  }
-}
+  input[type='password'], input[type='email']{
+    display:block;
+    width: 40%;
+    min-width: 230px;
+    margin: 15px auto;
+    padding: 15px;
+    border:none;
+    border-bottom: 3px solid @main-color;
 
-.bottom-container {
-  width: 100%;
-  height:200px;
+  }
+
+
 }

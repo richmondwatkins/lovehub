@@ -8,8 +8,6 @@ var Model;
 module.exports = (model, fn)=>{
   Model = traceur.require(__dirname + '/../../app/models/' + model + '.js');
   var records = fs.readFileSync(__dirname + '/../../db/' + model + '.json', 'utf8');
-  console.log('RECORDS RECORDS');
-  console.log(records);
   records = JSON.parse(records);
   async.map(records, iterator, (e,objs)=>fn(objs));
 };
