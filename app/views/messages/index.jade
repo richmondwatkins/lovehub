@@ -1,80 +1,106 @@
 extends ../shared/template
 
 block content
-  .button-container
-    button.btn.btn-warning#messages(type='button', data-toggle='modal', data-target='#myModal') Register
-    .modal.fade#myModal(tabindex='-1', role='dialog')
-        .modal-dialog
-          .modal-content
-            .modal-header
-              button.close(type='button', data-dismiss='modal') &times;
-              h4.modal-title#myModalLable Modal test
-            .modal-body
-              p hello world
-            .modal-footer
-              button.submit.btn.btn-info Submit
+  if(messages)
+    .button-container
+    each message in messages
+      div(class='modal fade', id='#{message._id}', tabindex='-1', role='dialog')
+          .modal-dialog
+            .modal-content
+              .modal-header
+                button.close(type='button', data-dismiss='modal') &times;
+                h4.modal-title#myModalLable= message.subject
+              .modal-body
+                p= message.content
+              .modal-footer
+                button.submit.btn.btn-info Submit
 
-  #compose
-    .panel.panel-default#messages
-      .panel-heading
-        span.glyphicon.glyphicon-pencil
-        h2.panel-title compose message
-      .panel-body
-        form(action='/messages/send', method='post')
-          .input-group
-            span.input-group-addon to
-            input.form-control(type='text', name='username')
-          .input-group
-            span.input-group-addon subject
-            input.form-control(type='text', name='subject')
-          br
-          textarea.form-control(name='message')
-          button.btn.btn-success.glyphicon.glyphicon-send
-          button.btn.btn-default.glyphicon.glyphicon-remove
+    .button-container
+    each message in sentMessages
+      div(class='modal fade', id='#{message._id}', tabindex='-1', role='dialog')
+          .modal-dialog
+            .modal-content
+              .modal-header
+                button.close(type='button', data-dismiss='modal') &times;
+                h4.modal-title#myModalLable= message.subject
+              .modal-body
+                p= message.content
+              .modal-footer
+                button.submit.btn.btn-info Submit
 
 
+  ul.nav.nav.tabs
+    li.active
+      a(href='#compose', data-toggle='tab') compose
+    li
+      a(href='#inbox', data-toggle='tab') inbox
+    li
+      a(href='#sent', data-toggle='tab') sent
+
+  .tab-content
+    .tab-pane.active#compose
+      .panel.panel-default#messages
+        .panel-heading
+          span.glyphicon.glyphicon-pencil
+          h2.panel-title compose message
+        .panel-body
+          form(action='/messages', method='post')
+            .input-group
+              span.input-group-addon to
+              input.form-control#message-to(type='text', name='username')
+            .input-group
+              span.input-group-addon subject
+              input.form-control#message-subject(type='text', name='subject')
+            br
+            textarea.form-control#message-content(name='message')
+            button.btn.btn-success.glyphicon.glyphicon-send
+            button.btn.btn-default.glyphicon.glyphicon-remove#clear
+    .tab-pane#inbox
+      .panel.panel-default#messages
+        .panel-heading
+          span.glyphicon.glyphicon-inbox
+          h2.panel-title inbox
+        table.table
+          thead
+            tr
+              td From
+              td Subject
+              td
+              td
+          tbody
+          if(messages)
+            each message in messages
+              tr
+                td= message.fromUsername
+                td= message.subject
+                td
+                  button.btn.btn-info.glyphicon.glyphicon-eye-open(type='button', data-toggle='modal', data-target='##{message._id}')
+                td
+                  button.btn.btn-warning.glyphicon.glyphicon-trash
 
 
-  #inbox
-    .panel.panel-default#messages
-      .panel-heading
-        span.glyphicon.glyphicon-inbox
-        h2.panel-title inbox
-      table.table
-        thead
-          tr
-            td From
-            td Subject
-            td
-            td
-        tbody
-          tr
-            td hornoctopus
-            td date tonight
-            td
-              button.btn.btn-info.glyphicon.glyphicon-eye-open
-            td
-              button.btn.btn-warning.glyphicon.glyphicon-trash
-  #sent
-    .panel.panel-default#messages
-      .panel-heading
-        span.glyphicon.glyphicon-send
-        h2.panel-title sent
-      table.table
-        thead
-          tr
-            td to
-            td Subject
-            td
-            td
-        tbody
-          tr
-            td horncat
-            td hey babe
-            td
-              button.btn.btn-info.glyphicon.glyphicon-eye-open
-            td
-              button.btn.btn-warning.glyphicon.glyphicon-trash
+    .tab-pane#sent
+      .panel.panel-default#messages
+        .panel-heading
+          span.glyphicon.glyphicon-send
+          h2.panel-title sent
+        table.table
+          thead
+            tr
+              td to
+              td Subject
+              td
+              td
+          tbody
+          if(sentMessages)
+            each message in sentMessages
+              tr
+                td= message.toUsername
+                td= message.subject
+                td
+                  button.btn.btn-info.glyphicon.glyphicon-eye-open(type='button', data-toggle='modal', data-target='##{message._id}')
+                td
+                  button.btn.btn-warning.glyphicon.glyphicon-trash
 
 
 block scripts

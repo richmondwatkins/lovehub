@@ -22,16 +22,17 @@ html
           #bs-example-navbar-collapse-1.collapse.navbar-collapse
             ul.nav.navbar-nav
               li
+<<<<<<< HEAD
                 a.glyphicon.glyphicon-user(href='/users') profile
+=======
+                a.glyphicon.glyphicon-user(href='/users/#{user._id}') profile
+>>>>>>> 4b87e31e5d814ab1af4a83dc02c9974528932222
               li
-                a.glyphicon.glyphicon-envelope(href='/messages')
+                a.glyphicon.glyphicon-envelope(href='/messages') messages
               li
-                a.glyphicon(href='/chat') chat
-
-            form.navbar-form.navbar-left(role='search')
-              .form-group
-                input.form-control(type='text', placeholder='Search')
-              button.btn.btn-default(type='submit') Submit
+                a.glyphicon.glyphicon-bullhorn(href='/chat') chat
+              li
+                a.glyphicon.glyphicon-eye-open(href='/search') search
             ul.nav.navbar-nav.navbar-right
               li
                 a.glyphicon.glyphicon-log-in(href='/login') Login
