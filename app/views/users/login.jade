@@ -1,11 +1,16 @@
 extends ../shared/template
 
 block content
-  h1 Member Login
 
-  form#member-login(action='/login', method='post')
-    input(type='email', name='email', placeholder='Email Address')
-    input(type='password', name='password', placeholder='Password')
-    button#login Login
+  .login-containeer
+    .login-content
+      img(src='/img/loveHUB.png')
+      h1 Member Login
+
+    .member-login
+      form#member-login-form(action='/login', method='post')
+        input(type='email', name='email', placeholder='Email Address')
+        input(type='password', name='password', placeholder='Password')
+        button.button-border-action#login Login
 
 block scripts
