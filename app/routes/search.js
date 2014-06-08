@@ -5,7 +5,7 @@ var User = traceur.require(__dirname + '/../models/user.js');
 
 exports.index = (req, res)=>{
     res.locals.user.findParams(results=>{
-      User.findMatches(results, matchedUsers=>{
+    res.locals.user.findMatches(results, matchedUsers=>{
         res.render('search/index', {matchedUsers: matchedUsers});
     });
   });

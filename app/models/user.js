@@ -15,42 +15,37 @@ var _ = require('lodash');
 class User{
 
   static create(obj, fn){
-      console.log('THIS IS THE OBJ');
-      console.log(obj);
-    var form = new multiparty.Form();
-    form.parse(obj, (err, fields, files)=>{
-      users.findOne({username: fields.username[0], email: fields.email[0]}, (e, u)=>{
+      users.findOne({username: obj.fields.username[0], email: obj.fields.email[0]}, (e, u)=>{
         if(!u){
           var user = new User();
-          user.username = fields.username[0];
-          user.age = parseInt(fields.age[0]);
-          user.email = fields.email[0];
-          user.aboutMe = fields.aboutMe[0];
-          user.password = bcrypt.hashSync(fields.password[0], 8);
-          user.gender = fields.gender[0];
-          user.isDeveloper = fields.isDeveloper[0];
-          user.seekingDeveloper = fields.seekingDeveloper[0];
-          user.seekingGender = fields.seekingGender[0];
-          user.zipcode = fields.zipcode[0];
-          user.githubUsername = fields.githubUsername[0];
-          user.developerType = fields.developerType[0];
-          users.save(user, ()=>user.uploadAlbum(files, ()=>fn(user)));
-          obj.session.userId = user._id;
+          user.username = obj.fields.username[0];
+          user.age = parseInt(obj.fields.age[0]);
+          user.email = obj.fields.email[0];
+          user.aboutMe = obj.fields.aboutMe[0];
+          user.password = bcrypt.hashSync(obj.fields.password[0], 8);
+          user.gender = obj.fields.gender[0];
+          user.isDeveloper = obj.fields.isDeveloper[0];
+          user.seekingDeveloper = obj.fields.seekingDeveloper[0];
+          user.seekingGender = obj.fields.seekingGender[0];
+          user.zipcode = obj.fields.zipcode[0];
+          user.githubUsername = obj.fields.githubUsername[0];
+          user.developerType = obj.fields.developerType[0];
+          users.save(user, ()=>user.uploadAlbum(obj.files, ()=>fn(user)));
         }else{
           fn(null);
         }
       });
-    });
   } //end of create
 
 
 
   static login(obj, fn){
+    console.log('LOG IN INFO');
+    console.log(obj);
     users.findOne({email: obj.email}, (e, u)=>{
       if(u){
         var isMatch = bcrypt.compareSync(obj.password, u.password);
         if(isMatch){
-          obj.session.userId = u._id;
           fn(u);
         }else{
           fn(null);
@@ -149,6 +144,7 @@ class User{
     var searchParams = {};
     searchParams.seekingDeveloper  = this.seekingDeveloper;
     searchParams.seekingGender = this.seekingGender;
+    searchParams.seekerGender = this.gender;
     fn(searchParams);
   }
 
@@ -161,14 +157,16 @@ class User{
   }
 
 
-  static findMatches(params, fn){
+  findMatches(params, fn){
+    var user = this;
     var gender = params.seekingGender;
     var dev = params.seekingDeveloper;
+    var seeker = params.seekerGender;  //found user's gender seeking preference
     console.log('GENDER');
     console.log(gender);
     console.log('DEV STATUS');
     console.log(dev);
-    users.find({gender: gender, isDeveloper: dev}).toArray((e, users)=>{
+    users.find({_id: {$ne: user._id}, gender: gender, isDeveloper: dev, seekingGender: seeker}).toArray((e, users)=>{
       users = users.map(u=>_.create(User.prototype, u));
         fn(users);
     });

@@ -2,6 +2,7 @@
 'use strict';
 var traceur = require('traceur');
 var User = traceur.require(__dirname + '/../models/user.js');
+var multiparty = require('multiparty');
 
 exports.index = (req, res)=>{
   res.render('users/index', {title: 'user'});
@@ -12,9 +13,16 @@ exports.new = (req, res)=>{
 };
 
 exports.create = (req, res)=>{
-  User.create(req, user=>{
-    console.log(user);
+  var form = new multiparty.Form();
+  form.parse(req, (err, fields, files)=>{
+    var temp = {}; //Old Richmond wante to run tests..what an idiot..anyway, hey man, we did this to pass one object into the factory from user.json..whatever...good luck fixing this shit up
+    temp.fields = fields;
+    temp.files = files;
+
+  User.create(temp, user=>{
+    req.session.userId = user._id;
     res.redirect(`/users/${user._id}`);
+    });
   });
 };
 
