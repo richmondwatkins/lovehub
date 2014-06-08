@@ -1,0 +1,105 @@
+extends ../shared/template
+
+block content
+  .button-container
+    button.btn.btn-warning#messages(type='button', data-toggle='modal', data-target='#myModal') Register
+    .modal.fade#myModal(tabindex='-1', role='dialog')
+        .modal-dialog
+          .modal-content
+            .modal-header
+              button.close(type='button', data-dismiss='modal') &times;
+              h4.modal-title#myModalLable Modal test
+            .modal-body
+              p hello world
+            .modal-footer
+              button.submit.btn.btn-info Submit
+  //- button.btn.btn-warning(type='submit', data-toggle='modal', data-target='#myModal') Register
+  //- .modal.fade#myModal(tabindex='-1', role='dialog')
+  //-   .modal-dialog
+  //-     .modal-content
+  //-       .modal-header
+  //-         button.close(type='button', data-dismiss='modal') &times;
+  //-         h4.modal-title#myModalLable Registration Form
+  //-       .modal-body
+  //-         p works
+  //-       .modal-footer
+  //-         button.submit.btn.btn-info Submit
+  //- button(class='btn btn-primary btn-lg', data-toggle='modal', data-target='#myModal') Launch demo modal
+  //- //- button.btn.btn-primary.btn-lg(data-toggle='modal' data-target='#myModal') Launch demo modal
+  //- div(class='modal fade' id='myModal', tabindex='-1', role='dialog')
+  //-   div(class='modal-dialog')
+  //-     div(class='modal-content')
+  //-       div(class='modal-header')
+  //-         button(type='button', class='close', data-dismiss='modal') x
+  //-         h4(class='modal-title', id='myModalLabel') Modal title
+  //-
+  //-       div(class='modal-body')
+  //-         p one nice body
+  //-       div(class='modal-footer')
+  //-         button(type='button', class='btn btn-default', data-dismiss='modal') Close
+  //-         button(type="button" class='btn btn-primary') Save changes
+
+  #compose
+    .panel.panel-default#messages
+      .panel-heading
+        span.glyphicon.glyphicon-pencil
+        h2.panel-title compose message
+      .panel-body
+        form(action='/users/login', method='get')
+          .input-group
+            span.input-group-addon to
+            input.form-control(type='text', name='username')
+          .input-group
+            span.input-group-addon subject
+            input.form-control(type='text', name='password')
+          br
+          textarea.form-control(name='message')
+          button.btn.btn-success.glyphicon.glyphicon-send
+          button.btn.btn-default.glyphicon.glyphicon-remove
+
+
+
+
+  #inbox
+    .panel.panel-default#messages
+      .panel-heading
+        span.glyphicon.glyphicon-inbox
+        h2.panel-title inbox
+      table.table
+        thead
+          tr
+            td From
+            td Subject
+            td
+            td
+        tbody
+          tr
+            td hornoctopus
+            td date tonight
+            td
+              button.btn.btn-info.glyphicon.glyphicon-eye-open
+            td
+              button.btn.btn-warning.glyphicon.glyphicon-trash
+  #sent
+    .panel.panel-default#messages
+      .panel-heading
+        span.glyphicon.glyphicon-send
+        h2.panel-title sent
+      table.table
+        thead
+          tr
+            td to
+            td Subject
+            td
+            td
+        tbody
+          tr
+            td horncat
+            td hey babe
+            td
+              button.btn.btn-info.glyphicon.glyphicon-eye-open
+            td
+              button.btn.btn-warning.glyphicon.glyphicon-trash
+
+
+block scripts

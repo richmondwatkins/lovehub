@@ -54,12 +54,15 @@ exports.lookup = (req, res, next)=>{
   });
 };
 
+
 exports.edit = (req, res)=>{
-  User.findById(req.params.id, user=>{
-    if(user.isOwner(res.locals.user)){
-      res.render('users/edit', {});  //
-    }else{
-      res.redirect('/users/show');
-    }
+  User.findUserById(req.params.userId, user=>{
+    res.render('users/edit', {user:user, title: 'Profile: Edit'});
+  });
+};
+
+exports.update = (req, res)=>{
+  User.findUserById(req.params.userId, user=>{
+    user.editProfile(req.body, ()=>res.redirect(`/users/${user._userId}`));
   });
 };

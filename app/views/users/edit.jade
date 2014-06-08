@@ -1,0 +1,56 @@
+extends ../shared/template
+
+block content
+  .panel.panel-default#editProfile
+    .panel-heading
+      h1 Edit Profile
+    .panel-body
+      form(action='/users/#{user._id}', method='post')
+        input(type='hidden', name='_method', value='put')
+        .input-group
+          span.input-group-addon name
+          input.form-control(type='text', name='username', value='#{user.username}')
+        .input-group
+          span.input-group-addon.glyphicon.glyphicon-envelope email
+          input.form-control(type='email', name='email', value='#{user.email}')
+        .input-group
+          span.input-group-addon password
+          input.form-control(type='password', name='password', value='#{user.password}')
+        .input-group
+          span.input-group-addon zipcode
+          input.form-control(type='text', name='zipcode', value='#{user.zipcode}')
+        .input-group
+          span.input-group-addon gender
+          select.form-control(name='gender')
+            option male
+            option female
+        .input-group
+          span.input-group-addon age
+          input.form-control(type='text', name='age', value='#{user.age}')
+        .input-group
+          span.input-group-addon github username
+          input.form-control(type='text', name='githubUsername', required, value='#{user.githubUsername}')
+        .input-group
+          span.input-group-addon are you a developer?
+          select.form-control(name='isDeveloper')
+            option True
+            option False
+        .input-group
+          span.input-group-addon what type of developer?
+          select.form-control(name='developerType')
+            option Front End
+            option Back End
+        .input-group
+          span.input-group-addon seeking developer?
+          select.form-control(name='seekingDeveloper')
+            option True
+            option False
+        .input-group
+          span.input-group-addon interested in?
+          select.form-control(name='seekingGender')
+            option Male
+            option Female
+        .input-group
+          span.input-group-addon about me
+          textarea.form-control(name='aboutMe')= user.aboutMe
+        button.button-border-action.glyphicon.glyphicon-save#profile-save Save Profile

@@ -33,10 +33,8 @@ block content
           a.glyphicon.glyphicon-envelope(href='mailto:#{user.email}?Subject=Hey%20there!')= user.email
         li
           a(href='/chat') chat with #{user.username}
-
-        if(user && user.isOwner(user))  
-          li
-            a(href='/edit') edit profile
+        li
+          a(href='/users/#{user._id}/edit') edit profile
 
     #carousel-example-generic.carousel.slide(data-ride='carousel')
       ol.carousel-indicators
