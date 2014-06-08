@@ -13,7 +13,6 @@ exports.new = (req, res)=>{
 
 exports.create = (req, res)=>{
   User.create(req, user=>{
-    console.log(user);
     res.redirect(`/users/${user._id}`);
   });
 };
@@ -21,7 +20,6 @@ exports.create = (req, res)=>{
 exports.show = (req, res)=>{
   User.findUserById(req.params.userId, user=>{
     var path = user.primaryPhotoPath();
-    console.log(path);
     res.render('users/show' , {user:user, primaryPic:path});
   });
 };
