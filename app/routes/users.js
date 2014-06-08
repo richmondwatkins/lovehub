@@ -70,7 +70,12 @@ exports.edit = (req, res)=>{
 };
 
 exports.update = (req, res)=>{
-  User.findUserById(req.params.userId, user=>{
-    user.editProfile(req.body, ()=>res.redirect(`/users/${user._userId}`));
+  User.findUserById(req.params.id, user=>{
+    console.log(user);
+    if(user.isOwner(res.locals.user)){
+      User.editProfile(req.body, ()=>res.redirect(`/users/${users._id}`));
+    }else{
+      res.redirect('/users/edit');
+    }
   });
 };
