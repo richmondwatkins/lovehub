@@ -14,6 +14,8 @@ var multiparty = require('multiparty');
 class User{
 
   static create(obj, fn){
+      console.log('THIS IS THE OBJ');
+      console.log(obj);
     var form = new multiparty.Form();
     form.parse(obj, (err, fields, files)=>{
       users.findOne({username: fields.username[0], email: fields.email[0]}, (e, u)=>{
@@ -32,6 +34,7 @@ class User{
           user.githubUsername = fields.githubUsername[0];
           user.developerType = fields.developerType[0];
           users.save(user, ()=>user.uploadAlbum(files, ()=>fn(user)));
+          obj.session.userId = user._id;
         }else{
           fn(null);
         }
@@ -39,11 +42,14 @@ class User{
     });
   } //end of create
 
+
+
   static login(obj, fn){
     users.findOne({email: obj.email}, (e, u)=>{
       if(u){
         var isMatch = bcrypt.compareSync(obj.password, u.password);
         if(isMatch){
+          obj.session.userId = u._id;
           fn(u);
         }else{
           fn(null);
@@ -85,7 +91,6 @@ class User{
       user.githubUsername = obj.githubUsername;
       user.zipcode = obj.zipcode;
       user.developerType = obj.developerType;
-      user.photos = obj.photos;
       users.save(user, ()=>fn());
   }//end of editProfile
 
@@ -99,6 +104,7 @@ class User{
        files.photos.forEach((p, i)=>{
         fs.renameSync(files.photos[i].path,`${__dirname}/../static/img/${user._id}/albumPhotos/${p.originalFilename}`);
          var photo = {};
+         p.originalFilename = p.originalFilename.replace(/\s/g, '');
          photo.path = `/img/${user._id}/albumPhotos/${p.originalFilename}`;
          photo.name = `${p.originalFilename}`;
          photo.isPrimary = i === 0;

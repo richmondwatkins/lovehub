@@ -23,3 +23,17 @@ exports.show = (req, res)=>{
     res.render('users/show' , {user:user, primaryPic:path});
   });
 };
+
+
+exports.logout = (req, res)=>{
+  req.session = null;
+  res.render('home/index', {title: 'LoveHub: Home'});
+};
+
+
+exports.lookup = (req, res, next)=>{
+  User.findUserById(req.session.userId, u=>{
+    res.locals.user = u;
+    next();
+  });
+};

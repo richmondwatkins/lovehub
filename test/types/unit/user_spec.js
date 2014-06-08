@@ -28,6 +28,8 @@ var User;
     global.nss.db.collection('users').drop(function(){
     cp.execFile(__dirname + '/../../fixtures/before.sh', {cwd:__dirname + '/../../fixtures'}, function(err, stdout, stderr){
       factory('user', function(users){
+        console.log('USER USER');
+        console.log(users);
         done();
         });
       });
@@ -36,25 +38,25 @@ var User;
 
 
 
-    describe('.create', function(){
-    it('should successfully create a user', function(done){
-      User.create({_id: '539210e386bba63fe0b2ddf6', age: '20', username: 'dilly69', email: 'dilly69@aol.com', password: 'lookin4tits', gender: 'male', isDeveloper:true, seekingDeveloper:false, seekingGender: 'male'}, function(u){
-        expect(u).to.be.ok;
-        expect(u).to.be.an.instanceof(User);
-        expect(u._id).to.be.an.instanceof(Mongo.ObjectID);
-        // expect(u.password).to.have.length(60);
-        done();
-      });
-    }); //end of creatinga  user
-
-    it('should NOT create a user', function(done){
-      User.create({username: 'billy69', email: 'billy69@aol.com', password: 'lookin4boobs', gender: 'male', isDeveloper:true, seekingDeveloper:false, seekingGender: 'female'}, function(u){
-        expect(u).to.be.null;
-      done();
-      });
-    });//end of NOT creating a user
-
-  }); //end of second describe
+  //   describe('.create', function(){
+  //   it('should successfully create a user', function(done){
+  //     User.create({_id: '539210e386bba63fe0b2ddf6', age: '20', username: 'dilly69', email: 'dilly69@aol.com', password: 'lookin4tits', gender: 'male', isDeveloper:true, seekingDeveloper:false, seekingGender: 'male'}, function(u){
+  //       expect(u).to.be.ok;
+  //       expect(u).to.be.an.instanceof(User);
+  //       expect(u._id).to.be.an.instanceof(Mongo.ObjectID);
+  //       // expect(u.password).to.have.length(60);
+  //       done();
+  //     });
+  //   }); //end of creatinga  user
+  //
+  //   it('should NOT create a user', function(done){
+  //     User.create({username: 'billy69', email: 'billy69@aol.com', password: 'lookin4boobs', gender: 'male', isDeveloper:true, seekingDeveloper:false, seekingGender: 'female'}, function(u){
+  //       expect(u).to.be.null;
+  //     done();
+  //     });
+  //   });//end of NOT creating a user
+  //
+  // }); //end of second describe
 
   describe('.login', function(){
   it('should successfully log a user in', function(done){
