@@ -20,7 +20,7 @@ block content
         span.glyphicon.glyphicon-pencil
         h2.panel-title compose message
       .panel-body
-        form(action='/messages/send', method='post')
+        form(action='/messages', method='post')
           .input-group
             span.input-group-addon to
             input.form-control(type='text', name='username')
@@ -48,13 +48,15 @@ block content
             td
             td
         tbody
-          tr
-            td hornoctopus
-            td date tonight
-            td
-              button.btn.btn-info.glyphicon.glyphicon-eye-open
-            td
-              button.btn.btn-warning.glyphicon.glyphicon-trash
+        if(messages)
+          each message in messages
+            tr
+              td= message.fromUsername
+              td= message.subject
+              td
+                button.btn.btn-info.glyphicon.glyphicon-eye-open
+              td
+                button.btn.btn-warning.glyphicon.glyphicon-trash
   #sent
     .panel.panel-default#messages
       .panel-heading

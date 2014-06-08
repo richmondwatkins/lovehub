@@ -40,7 +40,7 @@ function load(app, fn){
   app.post('/search', dbg, search.filter);
 
   app.get('/messages', dbg, messages.index);
-  app.post('/messages/send', dbg, messages.create);
+  app.post('/messages', dbg, messages.create);
 
   console.log('Routes Loaded');
   fn();

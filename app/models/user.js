@@ -190,10 +190,13 @@ class User{
   }
 
   static findIdByUserName(username, fn){
-    users.findOne({username:username}, user=>{
+    users.findOne({username:username}, (e, user)=>{
+      user = _.create(User.prototype, user);
       fn(user);
     });
   }
+
+
 
 
   isOwner(user){
