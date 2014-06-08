@@ -1,6 +1,23 @@
 extends ../shared/template
 
 block content
+
   h3 Search Page
-  each user in matchedUsers
-    h3= user.username
+
+  h3 Seeking Age
+    button#showAll Show All
+    form#age
+      select(name='ageFilter')
+        option Select Age Range
+        option 18-25
+        option 25-30
+        option 33-35
+        option 35-45
+        option 45-55
+        option 55-65
+        option 65-100
+      button#filter Filter
+
+  #searchResults
+    each user in matchedUsers
+      h3= user.username

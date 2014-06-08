@@ -172,6 +172,24 @@ class User{
     });
   }
 
+  static findUsersByAge(obj, user, fn){
+    console.log(user);
+    var gender = user.seekingGender;
+    var dev = user.seekingDeveloper;
+    var seeker = user.gender;
+    obj = obj.ageFilter.split('-').map(o=>parseInt(o));
+    users.find( {_id: {$ne: user._id}, gender: gender, isDeveloper: dev, seekingGender: seeker, age: { $lt: obj[1], $gt: obj[0] } }).toArray((err, results)=>{
+      //user = res.locals.user (logged-in user); they are finding a user based on their seekingGender, their gender should equal the gender the other person is looking for
+      //matches them if if they are a developer and are seeking a developer
+      console.log(results);
+      fn(results);
+    });
+
+      // objs = objs.map(o=>_.create(User.prototype, o));
+
+  }
+
+
   isOwner(user){
     return user._id.toString() === this.userId.toString();
   }

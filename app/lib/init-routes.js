@@ -32,13 +32,15 @@ function load(app, fn){
   app.put('/users/:userId', dbg, users.update);
 
   app.get('/login', dbg, users.login);
-  app.post('/login', dbg,  users.authenticate);
+  app.post('/login', dbg, users.authenticate);
   app.get('/logout', dbg, users.logout);
 
   app.get('/search', dbg, search.index);
+  app.get('/search/all', dbg, search.resetSearch);
+  app.post('/search', dbg, search.filter);
 
   app.get('/messages', dbg, messages.index);
-
+  app.post('/messages/send', dbg, messages.create);
 
   console.log('Routes Loaded');
   fn();

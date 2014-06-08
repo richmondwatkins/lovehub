@@ -10,3 +10,18 @@ exports.index = (req, res)=>{
     });
   });
 };
+
+exports.filter = (req, res)=>{
+      User.findUsersByAge(req.body, res.locals.user, users=>{
+        res.render('search/filter', {users: users});
+    });
+  };
+
+
+exports.resetSearch = (req, res)=>{
+  res.locals.user.findParams(results=>{
+  res.locals.user.findMatches(results, matchedUsers=>{
+      res.render('search/all', {matchedUsers: matchedUsers});
+    });
+  });
+};
