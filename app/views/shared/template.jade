@@ -22,18 +22,24 @@ html
           #bs-example-navbar-collapse-1.collapse.navbar-collapse
             ul.nav.navbar-nav
               li
-                a.glyphicon.glyphicon-user(href='/users/#{user._id}') profile
+                if(user)
+                  a.glyphicon.glyphicon-user(href='/users/#{user._id}') profile
               li
-                a.glyphicon.glyphicon-envelope(href='/messages') messages
+                if(user)
+                  a.glyphicon.glyphicon-envelope(href='/messages') messages
               li
-                a.glyphicon.glyphicon-bullhorn(href='/chat') chat
+                if(user)
+                  a.glyphicon.glyphicon-bullhorn(href='/chat') chat
               li
-                a.glyphicon.glyphicon-eye-open(href='/search') search
+                if(user)
+                  a.glyphicon.glyphicon-eye-open(href='/search') search
             ul.nav.navbar-nav.navbar-right
               li
-                a.glyphicon.glyphicon-log-in(href='/login') Login
+                if(!user)
+                  a.glyphicon.glyphicon-log-in(href='/login') Login
               li
-                a.glyphicon.glyphicon-log-out(href='/logout') Logout
+                if(user)
+                  a.glyphicon.glyphicon-log-out(href='/logout') Logout
     block content
 
     script(src='/js/vendor/jquery-2.1.1.js')
