@@ -1,23 +1,32 @@
 extends ../shared/template
 
 block content
-
-  h3 Search Page
-
-  h3 Seeking Age
-    button#showAll Show All
-    form#age
-      select(name='ageFilter')
-        option Select Age Range
-        option 18-25
-        option 25-30
-        option 33-35
-        option 35-45
-        option 45-55
-        option 55-65
-        option 65-100
-      button#filter Filter
-
-  #searchResults
-    each user in matchedUsers
-      h3= user.username
+  #searchPageWrapper
+    .page-header
+      h1 Search Page
+    #searchFilters
+      h3 Seeking Age
+      button.btn.btn-default#showAll Show All
+      form#age
+        select.btn.btn-default.btn-lg(name='ageFilter')
+          option Select Age Range
+          option 18-25
+          option 25-30
+          option 33-35
+          option 35-45
+          option 45-55
+          option 55-65
+          option 65-100
+        button.btn.btn-default#filter Filter
+      hr
+    #searchResults
+      each user in matchedUsers
+        .row
+          .col-sm-6.col-md-4
+            .thumbnail
+              .thumbnailPhoto(style='background-image: url("#{user.photos[0].path}");')
+              .caption
+                h3= user.username
+                p= user.age
+                p=user.developerType
+                a.btn.btn-primary(href='users/#{user._id}') view profile

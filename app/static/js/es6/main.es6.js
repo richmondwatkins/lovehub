@@ -7,6 +7,15 @@
   function init(){
     $('#filter').click(filter);
     $('#showAll').click(showAll);
+    $('#clear').click(clearMessage);
+  }
+
+  function clearMessage(e){
+    $('#message-to').val('');
+    $('#message-subject').val('');
+    $('#message-content').val('');
+
+    e.preventDefault();
   }
 
 
