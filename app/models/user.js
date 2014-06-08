@@ -10,6 +10,7 @@ var mkdirp = require('mkdirp');
 var fs = require('fs');
 var bcrypt = require('bcrypt');
 var multiparty = require('multiparty');
+var _ = require('lodash');
 
 class User{
 
@@ -33,6 +34,7 @@ class User{
           user.zipcode = fields.zipcode[0];
           user.githubUsername = fields.githubUsername[0];
           user.developerType = fields.developerType[0];
+          user.flirts = [];
           users.save(user, ()=>user.uploadAlbum(files, ()=>fn(user)));
           obj.session.userId = user._id;
         }else{
@@ -41,8 +43,6 @@ class User{
       });
     });
   } //end of create
-
-
 
   static login(obj, fn){
     users.findOne({email: obj.email}, (e, u)=>{
@@ -60,6 +60,13 @@ class User{
     });
   } //end of login
 
+  static findFlirts(fn){
+    users.find({_id: {$in: this.flirts}}).toArray((err, flirts)=>{
+      flirts = flirts.map(f=>_.create(User.prototype, f));
+      fn(flirts);
+    });
+  }
+
   static findUserById(id, fn){
     Base.findById(id, users, User, fn);
   }// end of findUsersById
@@ -69,7 +76,10 @@ class User{
     Base.findAll(users, User, fn);
   } //end of findAllUsers
 
-
+  addFlirt(userId){
+    userId = Mongo.ObjectID(userId);
+    this.flirts.push(userId);
+  }
 
   editProfile(obj, fn){
     var user = this;
