@@ -2,13 +2,11 @@ extends ../shared/template
 
 block content
   .profile-wrapper
-    each photo in user.photos
-      .profile-bar(style='background-image: url("#{photo.isPrimary}");')
+    .profile-bar(style='background-image: url("/img/profile-bar/Sunset_Marina.jpg");')
       h1= user.username
     .pic-info
+      .profile-pic(style='background-image: url("#{primaryPic}");')
 
-      each photo in user.photos
-        .profile-pic(style='background-image: url("#{photo.isPrimary}");')
 
       .info
         ul
@@ -32,7 +30,7 @@ block content
         li
           a.btn.btn-primary.btn-lg.active.glyphicon.glyphicon-envelope(href='mailto:#{user.email}?Subject=Hey%20there!')= user.email
         li
-          a.btn.btn-primary.btn-lg.active(href='/chat') chat with will
+          a.btn.btn-primary.btn-lg.active(href='/chat') chat with #{user.name}
         li
           a.btn.btn-primary.btn-lg(href='/edit') edit profile
     #carousel-example-generic.carousel.slide(data-ride='carousel')
@@ -45,11 +43,9 @@ block content
       .carousel-inner
         each photo, i in user.photos
           if i === 0
-            .item.active
-              img(src='#{photo.path}')
+            .item.active(style='background-image:url(#{photo.path})')
           if !photo.isPrimary && i > 0
-            .item
-              img(src='#{photo.path}')
+            .item(style='background-image:url(#{photo.path})')
 
       a.left.carousel-control(href='#carousel-example-generic', data-slide='prev')
         span.glyphicon.glyphicon-chevron-left

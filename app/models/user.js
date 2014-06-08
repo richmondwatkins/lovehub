@@ -91,7 +91,6 @@ class User{
       user.githubUsername = obj.githubUsername;
       user.zipcode = obj.zipcode;
       user.developerType = obj.developerType;
-      user.photos = obj.photos;
       users.save(user, ()=>fn());
   }//end of editProfile
 
@@ -105,6 +104,7 @@ class User{
        files.photos.forEach((p, i)=>{
         fs.renameSync(files.photos[i].path,`${__dirname}/../static/img/${user._id}/albumPhotos/${p.originalFilename}`);
          var photo = {};
+         p.originalFilename = p.originalFilename.replace(/\s/g, '');
          photo.path = `/img/${user._id}/albumPhotos/${p.originalFilename}`;
          photo.name = `${p.originalFilename}`;
          photo.isPrimary = i === 0;
@@ -116,13 +116,14 @@ class User{
    });
   }
 
-  get primaryPhoto(){
+  primaryPhotoPath(){
+    var path = null;
     this.photos.forEach(p=>{
       if(p.isPrimary){
-        return p.path;
+        path = p.path;
       }
     });
-    return null;
+    return path;
   }
 
   coverPhoto(files, fn){

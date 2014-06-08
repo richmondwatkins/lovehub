@@ -20,9 +20,12 @@ exports.create = (req, res)=>{
 
 exports.show = (req, res)=>{
   User.findUserById(req.params.userId, user=>{
-    res.render('users/show' , {user:user});
+    var path = user.primaryPhotoPath();
+    console.log(path);
+    res.render('users/show' , {user:user, primaryPic:path});
   });
 };
+
 
 exports.logout = (req, res)=>{
   req.session = null;
