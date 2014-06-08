@@ -24,6 +24,11 @@ function load(app, fn){
   app.post('/users', dbg, users.create);
   app.get('/users/:userId', dbg, users.show);
 
+  app.get('/login', dbg, users.login);
+  app.post('/login', dbg,  users.authenticate);
+  app.get('/logout', dbg, users.logout);
+
+
 
   console.log('Routes Loaded');
   fn();

@@ -1,0 +1,11 @@
+extends ../shared/template
+
+block content
+  h1 Member Login
+
+  form#member-login(action='/login', method='post')
+    input(type='email', name='email', placeholder='Email Address')
+    input(type='password', name='password', placeholder='Password')
+    button#login Login
+
+block scripts

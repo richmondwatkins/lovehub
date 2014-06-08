@@ -25,3 +25,24 @@ exports.show = (req, res)=>{
     res.render('users/show' , {user:user, primaryPic:path});
   });
 };
+
+exports.login = (req, res)=>{
+  res.render('users/login', {title: 'Portfolio: Login'});
+};
+
+exports.authenticate = (req, res)=>{
+  User.login(req.body, user=>{
+    if(user){
+      req.session.userId = user._id;
+      res.redirect(`/users/${user._id}`);
+    }else{
+      req.session.userId = null;
+      res.redirect('/login');
+    }
+  });
+};
+
+exports.logout = (req, res)=>{
+  req.session.userId = null;
+  res.redirect('/');
+};
