@@ -30,6 +30,8 @@ function load(app, fn){
 
   app.get('/search', dbg, search.index);
 
+  app.get('/login', dbg, users.login);
+  app.post('/login', dbg, users.authenticate);
   app.get('/logout', dbg, users.logout);
 
 
