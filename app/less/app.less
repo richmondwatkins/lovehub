@@ -1,4 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Petit+Formal+Script);
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans+Mono);
 @main-color: #4EAE47;
 
 
@@ -51,8 +52,9 @@
   position: absolute;
 }
 
-.button, .btn.btn-primary {
+.button, .btn.btn-primary, .button-border-action {
   color:@main-color;
+  margin: 5px;
 }
 
 body{
@@ -61,6 +63,10 @@ body{
 
 .page-header, .panel-heading, .panel-body {
   text-align: center;
+
+  h1 {
+    color: @main-color;
+  }
 }
 
 .panel.panel-default {
@@ -162,8 +168,9 @@ body{
   position: relative;
 }
 
-.btn.btn-default {
+.button{
   color: @main-color;
+  margin:5px;
 }
 
 .about-content{
@@ -187,6 +194,16 @@ body{
 
 }
 
+.panel.panel-default#newProfile{
+  margin-top: 50px;
+  width: 50%;
+
+  .input-group{
+    margin-left:auto;
+    margin-right:auto;
+  }
+}
+
 #newProfile {
 
   .input-group {
@@ -196,4 +213,41 @@ body{
     }
 
   }
+}
+
+.success-images {
+  border-radius: 50%;
+  margin: 20px;
+}
+
+.third-container {
+
+  .success-images{
+    float: left;
+    box-shadow: 0em 0em 1em;
+  }
+  h3{
+    float: right;
+    font-family: 'Droid Sans Mono' ;
+    color: @main-color;
+  }
+}
+
+.fourth-container {
+
+  .success-images{
+    float: right;
+    box-shadow: 0em 0em 1em;
+  }
+  h3{
+    float: left;
+    font-family: 'Droid Sans Mono' ;
+    color: @main-color;
+    font-size: 40px;
+  }
+}
+
+.bottom-container {
+  width: 100%;
+  height:200px;
 }
