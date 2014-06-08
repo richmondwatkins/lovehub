@@ -189,6 +189,12 @@ class User{
 
   }
 
+  static findIdByUserName(username, fn){
+    users.findOne({username:username}, user=>{
+      fn(user);
+    });
+  }
+
 
   isOwner(user){
     return user._id.toString() === this.userId.toString();
