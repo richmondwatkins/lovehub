@@ -110,13 +110,14 @@ class User{
    });
   }
 
-  get primaryPhoto(){
+  primaryPhotoPath(){
+    var path = null;
     this.photos.forEach(p=>{
       if(p.isPrimary){
-        return p.path;
+        path = p.path;
       }
     });
-    return null;
+    return path;
   }
 
   coverPhoto(files, fn){
