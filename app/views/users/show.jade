@@ -26,13 +26,13 @@ block content
     .interact
       ul
         li
-          a.btn.btn-primary.btn-lg.active(href='http://www.github.com/#{user.githubUsername}') github profile
+          a.button-border-action(href='http://www.github.com/#{user.githubUsername}') github profile
         li
-          a.btn.btn-primary.btn-lg.active.glyphicon.glyphicon-envelope(href='mailto:#{user.email}?Subject=Hey%20there!')= user.email
+          a.button-border-action.glyphicon.glyphicon-envelope(href='mailto:#{user.email}?Subject=Hey%20there!')= user.email
         li
-          a.btn.btn-primary.btn-lg.active(href='/chat') chat with #{user.name}
+          a.button-border-action(href='/chat') chat with #{user.username}
         li
-          a.btn.btn-primary.btn-lg(href='/edit') edit profile
+          a.button-border-action(href='/edit') edit profile
     #carousel-example-generic.carousel.slide(data-ride='carousel')
       ol.carousel-indicators
         each photo, i in user.photos
