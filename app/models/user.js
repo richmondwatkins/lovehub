@@ -10,6 +10,7 @@ var mkdirp = require('mkdirp');
 var fs = require('fs');
 var bcrypt = require('bcrypt');
 var multiparty = require('multiparty');
+var _ = require('lodash');
 
 class User{
 
@@ -144,6 +145,12 @@ class User{
     });
   }
 
+  findParams(fn){
+    var searchParams = {};
+    searchParams.seekingDeveloper  = this.seekingDeveloper;
+    searchParams.seekingGender = this.seekingGender;
+    fn(searchParams);
+  }
 
   setPrimary(path, fn){
     users.update({_id:this._id, 'photos.isPrimary':true}, {$set:{'photos.$.isPrimary':false}}, ()=>{
@@ -154,6 +161,18 @@ class User{
   }
 
 
+  static findMatches(params, fn){
+    var gender = params.seekingGender;
+    var dev = params.seekingDeveloper;
+    console.log('GENDER');
+    console.log(gender);
+    console.log('DEV STATUS');
+    console.log(dev);
+    users.find({gender: gender, isDeveloper: dev}).toArray((e, users)=>{
+      users = users.map(u=>_.create(User.prototype, u));
+        fn(users);
+    });
+  }
 
 
 

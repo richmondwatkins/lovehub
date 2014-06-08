@@ -1,0 +1,6 @@
+extends ../shared/template
+
+block content
+  h3 Search Page
+  each user in matchedUsers
+    h3= user.username
