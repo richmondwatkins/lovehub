@@ -41,16 +41,18 @@ exports.logout = (req, res)=>{
 
 
 exports.lookup = (req, res, next)=>{
-  console.log('--------LOOKUP ROUTE----------');
-  console.log(req.session.userId);
-  User.findUserById(req.session.userId, u=>{
-    if(u){
-      res.locals.user = u;
-      next();
-    }else{
-      next();
-    }
-  });
+  if(req.session.userId !== null){
+    User.findUserById(req.session.userId, u=>{
+      if(u){
+        res.locals.user = u;
+        next();
+      }else{
+        next();
+      }
+    });
+  }else{
+    next();
+  }
 };
 
 exports.login = (req, res)=>{

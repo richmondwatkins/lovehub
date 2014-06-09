@@ -54,8 +54,8 @@ class User{
     });
   } //end of login
 
-  static findFlirts(fn){
-    users.find({_id: {$in: this.flirts}}).toArray((err, flirts)=>{
+  static findFlirts(flirts, fn){
+    users.find({_id: {$in: flirts}}).toArray((err, flirts)=>{
       flirts = flirts.map(f=>_.create(User.prototype, f));
       fn(flirts);
     });
