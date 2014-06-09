@@ -1,6 +1,13 @@
 #filtered-results
 
-  h2 Response!
 
   each user in users
-    h3= user.username
+      .row
+        .col-sm-6.col-md-4
+          .thumbnail
+            .thumbnailPhoto(style='background-image: url("#{user.photos[0].path}");')
+            .caption
+              h3= user.username
+              p= user.age
+              p=user.developerType
+              a.button-border-action(href='users/#{user._id}') view profile

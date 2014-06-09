@@ -14,7 +14,7 @@ block content
                 p= message.content
               .modal-footer
                 button.submit.btn.btn-info Submit
-
+  if(messages)
     .button-container
     each message in sentMessages
       div(class='modal fade', id='#{message._id}', tabindex='-1', role='dialog')

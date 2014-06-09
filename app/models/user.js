@@ -75,7 +75,6 @@ class User{
       user.username = obj.username;
       user.email = obj.email;
       user.aboutMe = obj.aboutMe;
-      user.password = bcrypt.hashSync(obj.password, 8);
       user.gender = obj.gender;
       user.isDeveloper = obj.isDeveloper;
       user.seekingDeveloper = obj.seekingDeveloper;
@@ -198,10 +197,10 @@ class User{
 
 
 
-
-  isOwner(user){
-    return user._id.toString() === this.userId.toString();
-  }
+  // 
+  // isOwner(user){
+  //   return user._id.toString() === this.userId.toString();
+  // }
 
 
 

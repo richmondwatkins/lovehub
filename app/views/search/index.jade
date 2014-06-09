@@ -21,12 +21,11 @@ block content
       hr
     #searchResults
       each user in matchedUsers
-        .row
-          .col-sm-6.col-md-4
-            .thumbnail
-              .thumbnailPhoto(style='background-image: url("#{user.photos[0].path}");')
-              .caption
-                h3= user.username
-                p= user.age
-                p=user.developerType
-                a.btn.btn-primary(href='users/#{user._id}') view profile
+        .thumbnail-container
+          .thumbnail
+            .thumbnailPhoto(style='background-image: url("#{user.photos[0].path}");')
+            .caption
+              h3= user.username
+              p= user.age
+              p=user.developerType
+              a.button-border-action(href='users/#{user._id}') view profile
