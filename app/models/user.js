@@ -120,6 +120,8 @@ class User{
   }
 
   uploadCoverPhoto(files, fn){
+    // if(files.length!==1){fn(null); return;}
+
     var user = this;
     mkdirp(`${__dirname}/../static/img/${user._id}/coverPhoto`, function(err) {
      if(err){
@@ -150,23 +152,23 @@ class User{
     return path;
   }
 
-  coverPhoto(files, fn){
-    // if(files.length!==1){fn(null); return;}
-    var user = this;
-    var coverphoto = {};
-    mkdirp(`${__dirname}/../static/img/${user._id}/coverPhoto`, function(err){
-      if(err){
-        console.error(err);
-      }else{
-        files.coverPhoto.forEach(p=>{fs.renameSync(files.coverPhoto[0].path, `${__dirname}/../static/img/${user._id}/coverPhoto/${p.originalFilename}`);
-        coverphoto.path = `/img/${user._id}/coverPhoto/${p.originalFilename}`;
-        coverphoto.name = `${p.originalFilename}`;
-        });
-      }
-      user.coverPhoto = coverphoto;
-      users.save(user, ()=>fn());
-    });
-  }
+  // coverPhoto(files, fn){
+  //   // if(files.length!==1){fn(null); return;}
+  //   var user = this;
+  //   var coverphoto = {};
+  //   mkdirp(`${__dirname}/../static/img/${user._id}/coverPhoto`, function(err){
+  //     if(err){
+  //       console.error(err);
+  //     }else{
+  //       files.coverPhoto.forEach(p=>{fs.renameSync(files.coverPhoto[0].path, `${__dirname}/../static/img/${user._id}/coverPhoto/${p.originalFilename}`);
+  //       coverphoto.path = `/img/${user._id}/coverPhoto/${p.originalFilename}`;
+  //       coverphoto.name = `${p.originalFilename}`;
+  //       });
+  //     }
+  //     user.coverPhoto = coverphoto;
+  //     users.save(user, ()=>fn());
+  //   });
+  // }
 
   findParams(fn){
     var searchParams = {};

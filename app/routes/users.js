@@ -28,8 +28,6 @@ exports.create = (req, res)=>{
   });
 };
 
-
-
 exports.login = (req, res)=>{
   res.render('users/login', {title: 'Portfolio: Login'});
 };
