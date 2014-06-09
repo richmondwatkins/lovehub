@@ -18,7 +18,7 @@ exports.create = (req, res)=>{
 
   var form = new multiparty.Form();
   form.parse(req, (err, fields, files)=>{
-    var temp = {}; //Old Richmond wanted to run tests..what an idiot..anyway, hey man, we did this to pass one object into the factory from user.json..whatever...good luck fixing this shit up
+    var temp = {};
     temp.fields = fields;
     temp.files = files;
 
@@ -95,9 +95,16 @@ exports.edit = (req, res)=>{
 };
 
 exports.update = (req, res)=>{
-  console.log(req.body);
+  var form = new multiparty.Form();
+  form.parse(req, (err, fields, files)=>{
+    var temp = {};
+    temp.fields = fields;
+    temp.files = files;
+    temp.user = res.locals.user._id;
+
   User.findUserById(req.params.userId, user=>{
-    user.editProfile(req.body, ()=>res.redirect(`/users/${user._id}`)); //Hey Guys, sup..its Old Richmond, I just got this working for y'all so if you break it its your own DAMN FAULT!!!
+    user.editProfile(temp, ()=>res.redirect(`/users/${user._id}`));
+    });
   });
 };
 

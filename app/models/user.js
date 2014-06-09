@@ -31,6 +31,7 @@ class User{
           user.zipcode = obj.fields.zipcode[0];
           user.githubUsername = obj.fields.githubUsername[0];
           user.developerType = obj.fields.developerType[0];
+          user.coverPhoto = null;
           users.save(user, ()=>user.uploadAlbum(obj.files, ()=>fn(user)));
         }else{
           fn(null);
@@ -83,25 +84,52 @@ class User{
     }
 
   editProfile(obj, fn){
-    var user = this;
-    var id = Mongo.ObjectID(obj._id);
-      user._id = Mongo.ObjectID(obj._id);
-      user.age = parseInt(obj.age);
-      user.username = obj.username;
-      user.email = obj.email;
-      user.aboutMe = obj.aboutMe;
-      user.gender = obj.gender;
-      user.isDeveloper = obj.isDeveloper;
-      user.seekingDeveloper = obj.seekingDeveloper;
-      user.seekingGender = obj.seekingGender;
+    console.log('obbbbbjjjjjjjjj');
+    console.log(obj);
 
-      user.zipcode = obj.zipcode;
-      user.githubUsername = obj.githubUsername;
-      user.developerType = obj.developerType;
-      user.githubUsername = obj.githubUsername;
-      user.zipcode = obj.zipcode;
-      user.developerType = obj.developerType;
-      users.save(user, ()=>fn());
+    console.log(obj.files);
+
+    var user = this;
+      user._id = Mongo.ObjectID(obj.user);
+      user.age = parseInt(obj.fields.age[0]);
+      user.username = obj.fields.username[0];
+      user.email = obj.fields.email[0];
+      user.aboutMe = obj.fields.aboutMe[0];
+      user.gender = obj.fields.gender[0];
+      user.isDeveloper = obj.fields.isDeveloper[0];
+      user.seekingDeveloper = obj.fields.seekingDeveloper[0];
+      user.seekingGender = obj.fields.seekingGender[0];
+
+      user.zipcode = obj.fields.zipcode[0];
+      user.githubUsername = obj.fields.githubUsername[0];
+      user.developerType = obj.fields.developerType[0];
+      user.githubUsername = obj.fields.githubUsername[0];
+      user.zipcode = obj.fields.zipcode[0];
+      user.developerType = obj.fields.developerType[0];
+
+      users.save(user, ()=>user.uploadCoverPhoto(obj.files, ()=>fn(user)));
+
+
+
+    //   var user = new User();
+    //   user.username = obj.fields.username[0];
+    //   user.age = parseInt(obj.fields.age[0]);
+    //   user.email = obj.fields.email[0];
+    //   user.aboutMe = obj.fields.aboutMe[0];
+    //   user.password = bcrypt.hashSync(obj.fields.password[0], 8);
+    //   user.gender = obj.fields.gender[0];
+    //   user.isDeveloper = obj.fields.isDeveloper[0];
+    //   user.seekingDeveloper = obj.fields.seekingDeveloper[0];
+    //   user.seekingGender = obj.fields.seekingGender[0];
+    //   user.zipcode = obj.fields.zipcode[0];
+    //   user.githubUsername = obj.fields.githubUsername[0];
+    //   user.developerType = obj.fields.developerType[0];
+    //   users.save(user, ()=>user.uploadAlbum(obj.files, ()=>fn(user)));
+    // }else{
+    //   fn(null);
+    // }
+
+
   }//end of editProfile
 
   uploadAlbum(files, fn){
@@ -121,6 +149,27 @@ class User{
          photoArray.push(photo);
        });
        user.photos = photoArray;
+       users.save(user, ()=>fn());
+     }
+   });
+  }
+
+  uploadCoverPhoto(files, fn){
+    var user = this;
+    mkdirp(`${__dirname}/../static/img/${user._id}/coverPhoto`, function(err) {
+     if(err){
+       console.error(err);
+     }else{
+       var photoArray = [];
+       files.photos.forEach((p, i)=>{
+        fs.renameSync(files.photos[i].path,`${__dirname}/../static/img/${user._id}/coverPhoto/${p.originalFilename}`);
+         var photo = {};
+         p.originalFilename = p.originalFilename.replace(/\s/g, '');
+         photo.path = `/img/${user._id}/coverPhoto/${p.originalFilename}`;
+         photo.name = `${p.originalFilename}`;
+         photoArray.push(photo);
+       });
+       user.coverPhoto = photoArray;
        users.save(user, ()=>fn());
      }
    });

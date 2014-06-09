@@ -3,8 +3,12 @@ extends ../shared/template
 block content
   .profile-wrapper
     .row
-      .profile-bar(style='background-image: url("/img/profile-bar/Sunset_Marina.jpg");')
-        h1= showUser.username
+      if(user.coverPhoto)
+        .profile-bar(style='background-image: url(#{user.coverPhoto[0].path});')
+          h1= user.username
+      else
+        .profile-bar(style='background-image: url("/img/profile-bar/Sunset_Marina.jpg");')
+          h1= user.username
     .row
       .col-sm-12.col-md-1
       .col-sm-12.col-md-3
