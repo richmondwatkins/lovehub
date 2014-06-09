@@ -1,8 +1,10 @@
 /* jshint unused: false */
+
 'use strict';
 var traceur = require('traceur');
 var User = traceur.require(__dirname + '/../models/user.js');
 var multiparty = require('multiparty');
+
 
 exports.index = (req, res)=>{
   res.render('users/index', {title: 'user'});
@@ -25,6 +27,7 @@ exports.create = (req, res)=>{
     });
   });
 };
+
 
 
 exports.login = (req, res)=>{
@@ -79,6 +82,6 @@ exports.update = (req, res)=>{
 exports.show = (req, res)=>{
   User.findUserById(req.params.userId, user=>{
     var path = user.primaryPhotoPath();
-    res.render('users/show' , {user:user, primaryPic:path});
+    res.render('users/show' , {showUser:user, primaryPic:path});
   });
 };

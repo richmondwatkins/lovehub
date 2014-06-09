@@ -3,9 +3,13 @@ extends ../shared/template
 block content
   .profile-wrapper
     .row
+<<<<<<< HEAD
       if(user.coverPhoto[0].path)
         .profile-bar(style='background-image: url(#{user.coverPhoto[0].path});')
           h1= user.username
+=======
+      .profile-bar(style='background-image: url("/img/profile-bar/Sunset_Marina.jpg");')
+        h1= showUser.username
     .row
       .col-sm-12.col-md-1
       .col-sm-12.col-md-3
@@ -13,28 +17,28 @@ block content
         .info
           ul
             li
-              h4 looking for a #{user.seekingDeveloper}
+              h4 looking for a #{showUser.seekingDeveloper}
               //- p= user.seekingDeveloper
             li
-              h4 seeking a #{user.seekingGender}
+              h4 seeking a #{showUser.seekingGender}
               //- p= user.seekingGender
             li
-              h4 Zipcode #{user.zipcode}
+              h4 Zipcode #{showUser.zipcode}
               //- p= user.zipcode
             li
-              h4 I'm a #{user.developerType} developer
+              h4 I'm a #{showUser.developerType} developer
             li
               h4 #{user.age} years old
       .col-sm-12.col-md-4
         #carousel-example-generic.carousel.slide(data-ride='carousel')
           ol.carousel-indicators
-            each photo, i in user.photos
+            each photo, i in showUser.photos
               if i === 0
                 li.active(data-target='#carousel-example-generic', data-slide-to='0')
               if i > 0
                 li(data-target='#carousel-example-generic', data-slide-to='#{i}')
           .carousel-inner
-            each photo, i in user.photos
+            each photo, i in showUser.photos
               if i === 0
                 .item.active(style='background-image:url(#{photo.path})')
               if !photo.isPrimary && i > 0
@@ -51,11 +55,12 @@ block content
         ul
           li
 
-            a.btn.btn-default(href='http://www.github.com/#{user.githubUsername}') github profile
+            a.btn.btn-default(href='http://www.github.com/#{showUser.githubUsername}') github profile
           li
-            a.btn.btn-default.glyphicon.glyphicon-envelope(href='mailto:#{user.email}?Subject=Hey%20there!') email
+            a.btn.btn-default.glyphicon.glyphicon-envelope(href='mailto:#{showUser.email}?Subject=Hey%20there!') email
           li
-            a.btn.btn-default(href='/chat') chat with #{user.username}
+            a.btn.btn-default(href='/chat') chat with #{showUser.username}
           li
-            a.btn.btn-default(href='/users/#{user._id}/edit') edit profile
+            if (user.isOwner(showUser._id))
+              a.btn.btn-default(href='/users/#{showUser._id}/edit') edit profile
       .col-sm-12.col-md-2
