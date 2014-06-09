@@ -12,6 +12,7 @@ var bcrypt = require('bcrypt');
 var multiparty = require('multiparty');
 var _ = require('lodash');
 
+
 class User{
 
   static create(obj, fn){
@@ -67,13 +68,13 @@ class User{
   } //end of findAllUsers
 
 
+   isOwner(user){
+     console.log(user);
+     console.log(this);
+    return user.toString() === this._id.toString();
+  }
 
   editProfile(obj, fn){
-    console.log('obbbbbjjjjjjjjj');
-    console.log(obj);
-
-    console.log(obj.files);
-
     var user = this;
       user._id = Mongo.ObjectID(obj.user);
       user.age = parseInt(obj.fields.age[0]);
@@ -93,27 +94,6 @@ class User{
       user.developerType = obj.fields.developerType[0];
 
       users.save(user, ()=>user.uploadCoverPhoto(obj.files, ()=>fn(user)));
-
-
-
-    //   var user = new User();
-    //   user.username = obj.fields.username[0];
-    //   user.age = parseInt(obj.fields.age[0]);
-    //   user.email = obj.fields.email[0];
-    //   user.aboutMe = obj.fields.aboutMe[0];
-    //   user.password = bcrypt.hashSync(obj.fields.password[0], 8);
-    //   user.gender = obj.fields.gender[0];
-    //   user.isDeveloper = obj.fields.isDeveloper[0];
-    //   user.seekingDeveloper = obj.fields.seekingDeveloper[0];
-    //   user.seekingGender = obj.fields.seekingGender[0];
-    //   user.zipcode = obj.fields.zipcode[0];
-    //   user.githubUsername = obj.fields.githubUsername[0];
-    //   user.developerType = obj.fields.developerType[0];
-    //   users.save(user, ()=>user.uploadAlbum(obj.files, ()=>fn(user)));
-    // }else{
-    //   fn(null);
-    // }
-
 
   }//end of editProfile
 
