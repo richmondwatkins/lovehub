@@ -15,7 +15,7 @@ exports.new = (req, res)=>{
 exports.create = (req, res)=>{
   var form = new multiparty.Form();
   form.parse(req, (err, fields, files)=>{
-    var temp = {}; //Old Richmond wante to run tests..what an idiot..anyway, hey man, we did this to pass one object into the factory from user.json..whatever...good luck fixing this shit up
+    var temp = {}; //Old Richmond wanted to run tests..what an idiot..anyway, hey man, we did this to pass one object into the factory from user.json..whatever...good luck fixing this shit up
     temp.fields = fields;
     temp.files = files;
 
@@ -26,13 +26,6 @@ exports.create = (req, res)=>{
   });
 };
 
-exports.show = (req, res)=>{
-  User.findUserById(req.params.userId, user=>{
-    var path = user.primaryPhotoPath();
-    console.log(path);
-    res.render('users/show' , {user:user, primaryPic:path});
-  });
-};
 
 exports.login = (req, res)=>{
   res.render('users/login', {title: 'Portfolio: Login'});
@@ -70,7 +63,15 @@ exports.edit = (req, res)=>{
 };
 
 exports.update = (req, res)=>{
+  console.log(req.body);
   User.findUserById(req.params.userId, user=>{
-    user.editProfile(req.body, ()=>res.redirect(`/users/${user._userId}`));
+    user.editProfile(req.body, ()=>res.redirect(`/users/${user._id}`)); //Hey Guys, sup..its Old Richmond, I just got this working for y'all so if you break it its your own DAMN FAULT!!!
+  });
+};
+
+exports.show = (req, res)=>{
+  User.findUserById(req.params.userId, user=>{
+    var path = user.primaryPhotoPath();
+    res.render('users/show' , {user:user, primaryPic:path});
   });
 };

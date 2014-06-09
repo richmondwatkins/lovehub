@@ -5,8 +5,7 @@ block content
     .panel-heading
       h1 Edit Profile
     .panel-body
-      form(action='/users/#{user._id}', method='post')
-        input(type='hidden', name='_method', value='put')
+      form(action='/users/#{user._id}/edit', method='post')
         .input-group
           span.input-group-addon name
           input.form-control(type='text', name='username', value='#{user.username}')
