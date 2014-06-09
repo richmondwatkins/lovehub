@@ -12,6 +12,7 @@ var bcrypt = require('bcrypt');
 var multiparty = require('multiparty');
 var _ = require('lodash');
 
+
 class User{
 
   static create(obj, fn){
@@ -66,6 +67,11 @@ class User{
   } //end of findAllUsers
 
 
+   isOwner(user){
+     console.log(user);
+     console.log(this);
+    return user.toString() === this._id.toString();
+  }
 
   editProfile(obj, fn){
     var user = this;
@@ -197,7 +203,7 @@ class User{
 
 
 
-  // 
+  //
   // isOwner(user){
   //   return user._id.toString() === this.userId.toString();
   // }
