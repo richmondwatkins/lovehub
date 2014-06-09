@@ -5,7 +5,7 @@ block content
     .panel-heading
       h1 Edit Profile
     .panel-body
-      form(action='/users/#{user._id}/edit', method='post')
+      form(action='/users/#{user._id}/edit', method='post', enctype='multipart/form-data')
         .input-group
           span.input-group-addon name
           input.form-control(type='text', name='username', value='#{user.username}')
@@ -49,4 +49,8 @@ block content
         .input-group
           span.input-group-addon about me
           textarea.form-control(name='aboutMe')= user.aboutMe
+        .input-group
+          span.input-group-addon.glyphicon.glyphicon-picture
+          span.input-group-addon add cover photo
+          input.form-control(type='file', name='photos', required, multiple=false)
         button.button-border-action.glyphicon.glyphicon-save#profile-save Save Profile
