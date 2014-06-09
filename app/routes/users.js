@@ -80,14 +80,6 @@ exports.logout = (req, res)=>{
   res.redirect('/');
 };
 
-exports.lookup = (req, res, next)=>{
-  User.findUserById(req.session.userId, u=>{
-    res.locals.user = u;
-    next();
-  });
-};
-
-
 exports.edit = (req, res)=>{
   User.findUserById(req.params.userId, user=>{
     res.render('users/edit', {user:user, title: 'Profile: Edit'});

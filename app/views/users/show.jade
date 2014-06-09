@@ -3,12 +3,12 @@ extends ../shared/template
 block content
   .profile-wrapper
     .row
-      if(user.coverPhoto)
-        .profile-bar(style='background-image: url(#{user.coverPhoto[0].path});')
-          h1= user.username
+      if(showUser.coverPhoto)
+        .profile-bar(style='background-image: url(#{showUser.coverPhoto[0].path});')
+          h1= showUser.username
       else
         .profile-bar(style='background-image: url("/img/profile-bar/Sunset_Marina.jpg");')
-          h1= user.username
+          h1= showUser.username
     .row
       .col-sm-12.col-md-1
       .col-sm-12.col-md-3
@@ -17,17 +17,17 @@ block content
           ul
             li
               h4 looking for a #{showUser.seekingDeveloper}
-              //- p= user.seekingDeveloper
+              //- p= showUser.seekingDeveloper
             li
               h4 seeking a #{showUser.seekingGender}
-              //- p= user.seekingGender
+              //- p= showUser.seekingGender
             li
               h4 Zipcode #{showUser.zipcode}
-              //- p= user.zipcode
+              //- p= showUser.zipcode
             li
               h4 I'm a #{showUser.developerType} developer
             li
-              h4 #{user.age} years old
+              h4 #{showUser.age} years old
       .col-sm-12.col-md-4
         #carousel-example-generic.carousel.slide(data-ride='carousel')
           ol.carousel-indicators
@@ -49,16 +49,15 @@ block content
             span.glyphicon.glyphicon-chevron-right
         .row
           .about-me
-            p= user.aboutMe
+            p= showUser.aboutMe
       .interact.col-sm-12.col-md-2
         ul
           li
-
             a.btn.btn-default(href='http://www.github.com/#{showUser.githubUsername}') github profile
           li
             a.btn.btn-default.glyphicon.glyphicon-envelope(href='mailto:#{showUser.email}?Subject=Hey%20there!') email
           li
-            a.btn.btn-default(href='/chat') chat with #{showUser.username}
+            a.btn.btn-default(href='/messages/flirt/#{showUser._id}') invite #{showUser.username} to flirt!
           li
             if (user.isOwner(showUser._id))
               a.btn.btn-default(href='/users/#{showUser._id}/edit') edit profile

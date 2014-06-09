@@ -28,3 +28,17 @@ exports.create = (req, res)=>{
       res.redirect('/messages');
   });
 };
+
+exports.flirtInvite = (req, res)=>{
+  var invite = {};
+  User.findUserById(req.params.userId, target=>{
+    invite.toId = target._id;
+    invite.toUsername = target.username;
+    invite.fromId = res.locals.user._id;
+    invite.fromUsername = res.locals.user.username;
+    invite.subject = `${res.locals.user.username} wants to flirt!`;
+    invite.content = `To accept, go to /chat/${res.locals.user._id}`;
+    Message.create(invite);
+    res.redirect('/messages');
+  });
+};

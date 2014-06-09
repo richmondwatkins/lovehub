@@ -43,10 +43,12 @@ function load(app, fn){
 
   app.get('/messages', dbg, messages.index);
   app.post('/messages', dbg, messages.create);
+  app.get('/messages/flirt/:userId', dbg, messages.flirtInvite);
 
   app.get('/users/:userId', dbg, users.show);
 
   app.get('/chat', dbg, chat.index);
+  app.get('/chat/:userId', dbg, chat.addFlirt);
 
   console.log('Routes Loaded');
   fn();

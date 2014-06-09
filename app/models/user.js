@@ -80,9 +80,13 @@ class User{
     return user.toString() === this._id.toString();
   }
 
-    addFlirt(userId){
-      this.flirts.push(userId);
-    }
+  addFlirt(userId){
+    this.flirts.push(userId);
+  }
+
+  save(fn){
+    users.save(this, ()=>fn());
+  }
 
   editProfile(obj, fn){
     console.log('obbbbbjjjjjjjjj');
@@ -109,28 +113,6 @@ class User{
       user.developerType = obj.fields.developerType[0];
 
       users.save(user, ()=>user.uploadCoverPhoto(obj.files, ()=>fn(user)));
-
-
-
-    //   var user = new User();
-    //   user.username = obj.fields.username[0];
-    //   user.age = parseInt(obj.fields.age[0]);
-    //   user.email = obj.fields.email[0];
-    //   user.aboutMe = obj.fields.aboutMe[0];
-    //   user.password = bcrypt.hashSync(obj.fields.password[0], 8);
-    //   user.gender = obj.fields.gender[0];
-    //   user.isDeveloper = obj.fields.isDeveloper[0];
-    //   user.seekingDeveloper = obj.fields.seekingDeveloper[0];
-    //   user.seekingGender = obj.fields.seekingGender[0];
-    //   user.zipcode = obj.fields.zipcode[0];
-    //   user.githubUsername = obj.fields.githubUsername[0];
-    //   user.developerType = obj.fields.developerType[0];
-    //   users.save(user, ()=>user.uploadAlbum(obj.files, ()=>fn(user)));
-    // }else{
-    //   fn(null);
-    // }
-
-
   }//end of editProfile
 
   uploadAlbum(files, fn){
@@ -242,7 +224,7 @@ class User{
     var dev = user.seekingDeveloper;
     var seeker = user.gender;
     obj = obj.ageFilter.split('-').map(o=>parseInt(o));
-    users.find( {_id: {$ne: user._id}, gender: gender, isDeveloper: dev, seekingGender: seeker, age: { $lt: obj[1], $gt: obj[0] } }).toArray((err, results)=>{
+    users.find( {_id: {$ne: user._id}, gender: gender, isDeveloper: dev, seekingGender: seeker, age: { $lt: (obj[1]+1), $gt: (obj[0]-1) } }).toArray((err, results)=>{
       //user = res.locals.user (logged-in user); they are finding a user based on their seekingGender, their gender should equal the gender the other person is looking for
       //matches them if if they are a developer and are seeking a developer
       console.log(results);

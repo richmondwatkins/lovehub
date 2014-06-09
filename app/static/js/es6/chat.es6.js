@@ -34,6 +34,7 @@
     console.log('-------TARGET SOCKETID---------');
     console.log(socketId);
     var message = $('#chatInput').val();
+    message = `${userEmail} says: ${message}`;
     $('#chatInput').val('');
 
     socket.emit('sendMessage', {socketId:socketId, message:message, email:userEmail});
