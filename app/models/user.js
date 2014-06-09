@@ -38,8 +38,6 @@ class User{
       });
   } //end of create
 
-
-
   static login(obj, fn){
     console.log('LOG IN INFO');
     console.log(obj);
@@ -57,6 +55,13 @@ class User{
     });
   } //end of login
 
+  static findFlirts(flirts, fn){
+    users.find({_id: {$in: flirts}}).toArray((err, flirts)=>{
+      flirts = flirts.map(f=>_.create(User.prototype, f));
+      fn(flirts);
+    });
+  }
+
   static findUserById(id, fn){
     Base.findById(id, users, User, fn);
   }// end of findUsersById
@@ -72,6 +77,10 @@ class User{
      console.log(this);
     return user.toString() === this._id.toString();
   }
+  
+    addFlirt(userId){
+      this.flirts.push(userId);
+    }
 
   editProfile(obj, fn){
     var user = this;

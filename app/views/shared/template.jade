@@ -4,7 +4,11 @@ html
     meta(charset='utf-8')
     title= title
     link(href='/less/app.css', rel='stylesheet')
+
     link(href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css', rel='stylesheet')
+    script(src='/js/vendor/jquery-2.1.1.js')
+    script(src='https://cdn.socket.io/socket.io-1.0.4.js')
+    script(src='/js/vendor/traceur.js')
 
 
   body
@@ -38,17 +42,17 @@ html
                   a.glyphicon.glyphicon-log-in(href='/login') Login
               li
                 if(user)
-                  a.glyphicon.glyphicon-log-out(href='/logout') Logout
+                  a#logout.glyphicon.glyphicon-log-out(href='/logout') Logout
+
+
     block content
 
-    script(src='/js/vendor/jquery-2.1.1.js')
-    script(src='/js/vendor/lodash-2.4.1.js')
-    script(src='/js/vendor/moment-2.6.0.js')
-    script(src='/js/vendor/traceur.js')
-    script(src='/socket.io/socket.io.js')
-    script(src='/js/es5/main.js')
-    script(src='/js/es6/compiled/main.js')
-    script(src='//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js')
-    script(src='/js/es6/compiled/sockets.js')
+
 
     block scripts
+      script(src='/js/vendor/lodash-2.4.1.js')
+      script(src='/js/vendor/moment-2.6.0.js')
+      script(src='/js/vendor/buttons.js')
+      script(src='/js/es5/main.js')
+      script(src='/js/es6/compiled/main.js')
+      script(src='//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js')

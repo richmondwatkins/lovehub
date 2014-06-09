@@ -1,0 +1,22 @@
+extends ../shared/template
+
+block content
+  #user(style='display:none;' data-email=user.email)
+  .page-header
+    h1 Time to Flirt!
+      small live chat with those on your flirt list
+  .row
+    .col-md-2
+      .well
+        h3 Flirts Online
+        #online-flirts
+    .col-md-10
+      .well
+        #chat-box
+          h3 Chatting With 
+            span#chatter  No One :(
+          ul#conversation
+          input#chatInput(type='text', placeholder='Send a Message!')
+          button#sendChat Send
+block scripts
+  script(src='/js/es6/compiled/chat.js')
