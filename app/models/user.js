@@ -32,6 +32,7 @@ class User{
           user.githubUsername = obj.fields.githubUsername[0];
           user.developerType = obj.fields.developerType[0];
           user.coverPhoto = null;
+          user.flirts = [];
           users.save(user, ()=>user.uploadAlbum(obj.files, ()=>fn(user)));
         }else{
           fn(null);
@@ -78,7 +79,7 @@ class User{
      console.log(this);
     return user.toString() === this._id.toString();
   }
-  
+
     addFlirt(userId){
       this.flirts.push(userId);
     }
