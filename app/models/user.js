@@ -30,6 +30,7 @@ class User{
           user.zipcode = obj.fields.zipcode[0];
           user.githubUsername = obj.fields.githubUsername[0];
           user.developerType = obj.fields.developerType[0];
+          user.coverPhoto = null;
           users.save(user, ()=>user.uploadAlbum(obj.files, ()=>fn(user)));
         }else{
           fn(null);
@@ -74,7 +75,7 @@ class User{
     console.log(obj.files);
 
     var user = this;
-      user._id = Mongo.ObjectID(obj.res.session.user._id);
+      user._id = Mongo.ObjectID(obj.user);
       user.age = parseInt(obj.fields.age[0]);
       user.username = obj.fields.username[0];
       user.email = obj.fields.email[0];
@@ -151,7 +152,6 @@ class User{
          p.originalFilename = p.originalFilename.replace(/\s/g, '');
          photo.path = `/img/${user._id}/coverPhoto/${p.originalFilename}`;
          photo.name = `${p.originalFilename}`;
-         photo.isCover = i === 0;
          photoArray.push(photo);
        });
        user.coverPhoto = photoArray;

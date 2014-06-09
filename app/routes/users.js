@@ -68,7 +68,7 @@ exports.update = (req, res)=>{
     var temp = {};
     temp.fields = fields;
     temp.files = files;
-    temp.res.session.user = res.session.user;
+    temp.user = res.locals.user._id;
 
   User.findUserById(req.params.userId, user=>{
     user.editProfile(temp, ()=>res.redirect(`/users/${user._id}`));
